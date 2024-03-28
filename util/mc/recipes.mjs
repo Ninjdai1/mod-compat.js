@@ -9,7 +9,7 @@ function getRecipesFromFiles(files){
             } else if(json.type == "doapi:conditional"){
                 json = json.recipe
             }
-            let result = json.result?.item || json.result || json.outputItem || json.item || json.output?.item || json.output;
+            let result = json.result?.item || json.result || json.outputItem || json.item || json.output?.item || json.output || (json.results?.length==1 ? json.results[0] : undefined);
 
             if(!result){
                 continue;

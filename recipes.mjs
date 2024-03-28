@@ -142,7 +142,7 @@ function getIdFromRecipe(recipe){
     if(recipe.result){
         itemId = recipe.result?.item || recipe.result[0]?.item || recipe.result?.base_ingredient?.item || recipe.result;
     } else if(recipe.results){
-        itemId = recipe.results[0].item || recipe.results[0].item;
+        itemId = recipe.results[0].item || recipe.results[0].fluid;
     } else if(recipe.outputItem){
         itemId = recipe.outputItem;
     } else if(recipe.output){
