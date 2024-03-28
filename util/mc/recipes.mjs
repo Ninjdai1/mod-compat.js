@@ -2,10 +2,12 @@
 function getRecipesFromFiles(files){
     const recipes = {};
     for (const path in files) {
-        if (files.hasOwnProperty(path) && path.includes("/recipes/") && path.endsWith(".json")) {
+        if (files.hasOwnProperty(path) && path.includes("/recipes/") && !path.includes("/advancements/recipes/") && path.endsWith(".json")) {
             let json = JSON.parse(files[path].toString());
             if(json.type == "forge:conditional"){
                 json = json.recipes[0].recipe;
+            } else if(json.type == "doapi:conditional"){
+                json = json.recipe
             }
             let result = json.result?.item || json.result || json.outputItem || json.item || json.output?.item || json.output;
 

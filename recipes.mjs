@@ -82,6 +82,18 @@ function generateRecipes(modsData){
                             item: item
                         })
                         break;
+                    case "vinery:wine_fermentation":
+                        writeRecipe({
+                            recipe: withDependencies({
+                                recipe: convertVineryFermentationToCreateMixing(recipe, mod),
+                                mods: [mod, itemMod, "create"],
+                            }),
+                            modName: mod,
+                            targetMod: "create",
+                            targetType: "mixing",
+                            item: item
+                        })
+                        break;
                     case "bakery:pot_cooking":
                         writeRecipe({
                             recipe: withDependencies({
@@ -235,6 +247,15 @@ function convertVineryMashToCreatePress(recipe, mod){
         type: "create:compacting",
         results: [recipe.output],
         ingredients : [recipe.input],
+    };
+    return createRecipe;
+}
+
+function convertVineryFermentationToCreateMixing(recipe, mod){
+    const createRecipe = {
+        type: "create:mixing",
+        results: [recipe.result],
+        ingredients : recipe.ingredients,
     };
     return createRecipe;
 }
