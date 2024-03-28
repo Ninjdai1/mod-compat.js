@@ -1,0 +1,42 @@
+import fs from "fs";
+import path from "path";
+import { getData } from "./util/mc/datapack.mjs";
+
+function loadData(){
+    const modData = {};
+    const mods = fs
+        .readdirSync(path.resolve("./mods/"))
+        .filter((file) => file.endsWith(".jar") || file.endsWith(".zip"));
+    for (const mod of mods) {
+        modData[mod.split(".")[0]] = getData(`./mods/${mod}`)
+    }
+    //console.log(modData)
+    return modData;
+}
+
+function mergeModsData(modData){
+    const data = {
+        recipes: {},
+        langs: {}
+    };
+    for (const mod of modData) {
+        Object.keys(mod.recipes).forEach(modKey => {
+            if(data.recipes[modKey]){
+                data.recipes[modKey].push(...mod.recipes[modKey]);
+            } else {
+                data.recipes[modKey] = mod.recipes[modKey];
+            }
+        });
+
+        Object.keys(mod.langs).forEach(lang => {
+            if(data.langs[lang]){
+                data.langs[lang] = {...data.langs[lang], ...mod.langs[lang]};
+            } else {
+                data.langs[lang] = mod.langs[lang];
+            }
+        });
+    }
+    return data;
+}
+
+export { loadData, mergeModsData }
