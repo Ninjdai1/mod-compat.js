@@ -1,4 +1,5 @@
 import fs from "fs";
+import { vinery_bushes } from "./custom_data.mjs";
 
 function generateRecipes(modsData){
     for(const mod of Object.keys(modsData)){
@@ -134,6 +135,19 @@ function generateRecipes(modsData){
                 }
             }
         }
+    }
+    for(const bush of vinery_bushes){
+        const originMod = bush.seed.split(":")[0];
+        writeRecipe({
+            recipe: withDependencies({
+                recipe: vineryBushesToBotanyPots(bush),
+                mods: [originMod, "botanypots"],
+            }),
+            modName: originMod,
+            targetMod: "botanypots",
+            targetType: "crop",
+            item: bush.item.split(":")[1],
+        })
     }
 }
 
@@ -294,6 +308,31 @@ function convertBakeryBowlToCreateMixer(recipe, mod) {
     };
     createRecipe.ingredients.push(...recipe.ingredients);
     return createRecipe;
+}
+
+function vineryBushesToBotanyPots({seed, bush, item, categories}){
+    return {
+        type: "botanypots:crop",
+        seed: {
+            item: seed
+        },
+        categories: categories,
+        growthTicks: 2400,
+        display:{
+            type:"botanypots:transitional",
+            phases: [
+              { block:bush, properties: {age:0} },
+              { block:bush, properties: {age:1} },
+              { block:bush, properties: {age:2} },
+              { block:bush, properties: {age:3} },
+            ]
+        },
+        drops: [
+            { chance: 1, output: {item: item} },
+            { chance: 0.5, output: {item: item} },
+            { chance: 0.25, output: {item: item} },
+        ]
+    }
 }
 
 export { generateRecipes }
