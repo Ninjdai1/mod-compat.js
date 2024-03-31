@@ -129,6 +129,30 @@ function generateRecipes(modsData){
                             item: item
                         })
                         break;
+                    case "youkaishomecoming:kettle":
+                        writeRecipe({
+                            recipe: withDependencies({
+                                recipe: convertYoukaishomecomingKettleToHerbalbrewsKettle(recipe, mod),
+                                mods: [mod, itemMod, "herbalbrews"],
+                            }),
+                            modName: mod,
+                            targetMod: "herbalbrews",
+                            targetType: "kettle_brewing",
+                            item: item
+                        })
+                        break;
+                    case "herbalbrews:kettle_brewing":
+                        writeRecipe({
+                            recipe: withDependencies({
+                                recipe: convertHerbalbrewsKettleToYoukaishomecomingKettle(recipe, mod),
+                                mods: [mod, itemMod, "youkaishomecoming"],
+                            }),
+                            modName: mod,
+                            targetMod: "youkaishomecoming",
+                            targetType: "kettle",
+                            item: item
+                        })
+                        break;
 
                     default:
                         break;
@@ -333,6 +357,37 @@ function vineryBushesToBotanyPots({seed, bush, item, categories}){
             { chance: 0.25, output: {item: item} },
         ]
     }
+}
+
+function convertHerbalbrewsKettleToYoukaishomecomingKettle(recipe, mod) {
+    const youkaisRecipe = {
+        type: "youkaishomecoming:kettle",
+        container: recipe.container,
+        cookingtime: 200,
+        experience: recipe.experience,
+        recipe_book_tab: "drinks",
+        result: recipe.result,
+        ingredients: [],
+    }
+    for (const ingredient of recipe.ingredients) {
+        if(ingredient.item!="minecraft:water_bucket"){
+            youkaisRecipe.ingredients.push(ingredient);
+        }
+    }
+    return youkaisRecipe;
+}
+
+function convertYoukaishomecomingKettleToHerbalbrewsKettle(recipe, mod) {
+    const herbalbrewsRecipe = {
+        type: "herbalbrews:kettle_brewing",
+        container: recipe.container,
+        experience: recipe.experience,
+        result: recipe.result,
+        ingredients: recipe.ingredients,
+    }
+    herbalbrewsRecipe.ingredients.push({item: "minecraft:water_bucket"});
+    
+    return herbalbrewsRecipe;
 }
 
 export { generateRecipes }
