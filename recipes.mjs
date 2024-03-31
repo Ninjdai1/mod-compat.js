@@ -36,6 +36,16 @@ function generateRecipes(modsData){
                             targetType: "pot_cooking",
                             item: item
                         })
+                        writeRecipe({
+                            recipe: withDependencies({
+                                recipe: convertFDCookingToCandlelightCookingPot(recipe, mod),
+                                mods: [mod, itemMod, "candlelight"],
+                            }),
+                            modName: mod,
+                            targetMod: "candlelight",
+                            targetType: "pot_cooking",
+                            item: item
+                        })
                         break;
                     case "meadow:cooking":
                         writeRecipe({
@@ -56,6 +66,48 @@ function generateRecipes(modsData){
                             modName: mod,
                             targetMod: "bakery",
                             targetType: "pot_cooking",
+                            item: item
+                        })
+                        writeRecipe({
+                            recipe: withDependencies({
+                                recipe: convertMeadowCookingPotToCandlelightCookingPot(recipe, mod),
+                                mods: [mod, itemMod, "candlelight"],
+                            }),
+                            modName: mod,
+                            targetMod: "candlelight",
+                            targetType: "pot_cooking",
+                            item: item
+                        })
+                        break;
+                    case "candlelight:pot_cooking":
+                        writeRecipe({
+                            recipe: withDependencies({
+                                recipe: convertCandlelightCookingPotToFDCookingPot(recipe, mod),
+                                mods: [mod, itemMod, "farmersdelight"],                                                                                                        
+                            }),
+                            modName: mod,
+                            targetMod: "farmersdelight",
+                            targetType: "cooking",
+                            item: item
+                        })
+                        writeRecipe({
+                            recipe: withDependencies({
+                                recipe: convertCandlelightCookingPotToBakeryCookingPot(recipe, mod),
+                                mods: [mod, itemMod, "bakery"],
+                            }),
+                            modName: mod,
+                            targetMod: "bakery",
+                            targetType: "pot_cooking",
+                            item: item
+                        })
+                        writeRecipe({
+                            recipe: withDependencies({
+                                recipe: convertCandlelightCookingPotToMeadowCookingPot(recipe, mod),
+                                mods: [mod, itemMod, "meadow"],
+                            }),
+                            modName: mod,
+                            targetMod: "meadow",
+                            targetType: "cauldron",
                             item: item
                         })
                         break;
@@ -114,6 +166,16 @@ function generateRecipes(modsData){
                             modName: mod,
                             targetMod: "meadow",
                             targetType: "cooking",
+                            item: item
+                        })
+                        writeRecipe({
+                            recipe: withDependencies({
+                                recipe: convertBakeryCookingPotToCandlelightCookingPot(recipe, mod),
+                                mods: [mod, itemMod, "candlelight"],
+                            }),
+                            modName: mod,
+                            targetMod: "candlelight",
+                            targetType: "pot_cooking",
                             item: item
                         })
                         break;
@@ -262,6 +324,17 @@ function convertFDCookingToBakeryCookingPot(recipe, mod) {
     return meadowRecipe;
 }
 
+function convertFDCookingToCandlelightCookingPot(recipe, mod) {
+    const candlelightRecipe = {
+        type: "candlelight:pot_cooking",
+        result: recipe.result,
+        ingredients : [],
+    };
+    candlelightRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container) candlelightRecipe.container = recipe.container;
+    return candlelightRecipe;
+}
+
 function convertMeadowCookingPotToFDCooking(recipe, mod) {
     const FDRecipe = {
         type: "farmersdelight:cooking",
@@ -280,6 +353,52 @@ function convertMeadowCookingPotToBakeryCookingPot(recipe, mod) {
     };
     bakeryRecipe.ingredients.push(...recipe.ingredients);
     return bakeryRecipe;
+}
+
+function convertMeadowCookingPotToCandlelightCookingPot(recipe, mod) {
+    const candlelightRecipe = {
+        type: "candlelight:pot_cooking",
+        result: recipe.result,
+        ingredients : [],
+    };
+    candlelightRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container) candlelightRecipe.container = recipe.container;
+    return candlelightRecipe;
+}
+
+function convertCandlelightCookingPotToBakeryCookingPot(recipe, mod) {
+    const bakeryRecipe = {
+        type: "bakery:pot_cooking",
+        result: recipe.result,
+        ingredients : [],
+    };
+    bakeryRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container) bakeryRecipe.container = recipe.container;
+    return bakeryRecipe;
+}
+
+function convertCandlelightCookingPotToFDCookingPot(recipe, mod) {
+    const FDRecipe = {
+        type: "farmersdelight:cooking",
+        result: recipe.result,
+        ingredients : [],
+    };
+    FDRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container) FDRecipe.container = recipe.container;
+    return FDRecipe;
+}
+
+function convertCandlelightCookingPotToMeadowCookingPot(recipe, mod) {
+    const meadowRecipe = {
+        type: "meadow:cooking",
+        result: recipe.result,
+        ingredients : [],
+    };
+    if(recipe.container){
+        meadowRecipe.ingredients.push(recipe.container);
+    };
+    meadowRecipe.ingredients.push(...recipe.ingredients);
+    return meadowRecipe;
 }
 
 function convertMeadowCheeseToCreatePress(recipe, mod){
@@ -323,6 +442,17 @@ function convertBakeryCookingPotToMeadowCookingPot(recipe, mod) {
     };
     meadowRecipe.ingredients.push(...recipe.ingredients);
     return meadowRecipe;
+}
+
+function convertBakeryCookingPotToCandlelightCookingPot(recipe, mod) {
+    const candlelightRecipe = {
+        type: "candlelight:pot_cooking",
+        result: recipe.result,
+        ingredients : [],
+    };
+    candlelightRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container) candlelightRecipe.ingredients.push(recipe.container);
+    return candlelightRecipe;
 }
 
 function convertBakeryCookingPotToFDCooking(recipe, mod) {
