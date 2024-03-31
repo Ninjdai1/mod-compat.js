@@ -1,6 +1,5 @@
 node_modules/
 mods/*
-custom/*
 output/*
 
 package-lock.json

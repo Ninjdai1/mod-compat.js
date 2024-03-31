@@ -1,5 +1,5 @@
 import fs from "fs";
-import { vinery_bushes } from "./custom_data.mjs";
+import { vinery_bushes, cuttables } from "./custom_data.mjs";
 
 function generateRecipes(modsData){
     for(const mod of Object.keys(modsData)){
@@ -172,6 +172,20 @@ function generateRecipes(modsData){
             targetType: "crop",
             item: bush.item.split(":")[1],
         })
+    }
+    for(const mod of Object.keys(cuttables)){
+        for(const recipe of cuttables[mod]){
+            writeRecipe({
+                recipe: withDependencies({
+                    recipe: toFarmersDelightCuttable(recipe),
+                    mods: [mod, "farmersdelight"],
+                }),
+                modName: mod,
+                targetMod: "farmersdelight",
+                targetType: "cutting",
+                item: recipe.output[0].item.split(":")[1],
+            })
+        }
     }
 }
 
@@ -388,6 +402,18 @@ function convertYoukaishomecomingKettleToHerbalbrewsKettle(recipe, mod) {
     herbalbrewsRecipe.ingredients.push({item: "minecraft:water_bucket"});
     
     return herbalbrewsRecipe;
+}
+
+function toFarmersDelightCuttable(recipe) {
+    const FDRecipe = {
+        type: "farmersdelight:cutting",
+        ingredients: recipe.input,
+        result: recipe.output,
+        tool: {
+            tag: "letsdo_addon_compat:tools/knives"
+        }
+    }
+    return FDRecipe;
 }
 
 export { generateRecipes }

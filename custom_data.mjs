@@ -1,3 +1,44 @@
+const cuttables = {
+    meadow: [
+        {
+            input: [{item: "meadow:cheesecake"}],
+            output: [{item: "meadow:cheesecake_slice", count: 4}]
+        },
+        {
+            input: [{item: "meadow:cheese_tart"}],
+            output: [{item: "meadow:cheese_tart_slice", count: 4}]
+        },
+        {
+            input: [{item: "meadow:cheese_block"}],
+            output: [{item: "meadow:piece_of_cheese", count: 4}]
+        },
+        {
+            input: [{item: "meadow:amethyst_cheese_block"}],
+            output: [{item: "meadow:piece_of_amethyst_cheese", count: 4}]
+        },
+        {
+            input: [{item: "meadow:buffalo_cheese_block"}],
+            output: [{item: "meadow:piece_of_buffalo_cheese", count: 4}]
+        },
+        {
+            input: [{item: "meadow:goat_cheese_block"}],
+            output: [{item: "meadow:piece_of_goat_cheese", count: 4}]
+        },
+        {
+            input: [{item: "meadow:grain_cheese_block"}],
+            output: [{item: "meadow:piece_of_grain_cheese", count: 4}]
+        },
+        {
+            input: [{item: "meadow:sheep_cheese_block"}],
+            output: [{item: "meadow:piece_of_sheep_cheese", count: 4}]
+        },
+        {
+            input: [{item: "meadow:grain_cheese_block"}],
+            output: [{item: "meadow:piece_of_warped_cheese", count: 4}]
+        },
+    ]
+}
+
 const vinery_bushes = [
     {
         seed: "vinery:red_grape_seeds",
@@ -61,4 +102,4 @@ const vinery_bushes = [
     },
 ];
 
-export { vinery_bushes };
+export { vinery_bushes, cuttables };
