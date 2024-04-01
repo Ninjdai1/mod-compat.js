@@ -191,6 +191,18 @@ function generateRecipes(modsData){
                             item: item
                         })
                         break;
+                    case "bakery:baking_station":
+                        writeRecipe({
+                            recipe: withDependencies({
+                                recipe: convertBakeryStationToCreateDeployer(recipe, mod),
+                                mods: [mod, itemMod, "create"],
+                            }),
+                            modName: mod,
+                            targetMod: "create",
+                            targetType: "deploying",
+                            item: item
+                        })
+                        break;
                     case "youkaishomecoming:kettle":
                         writeRecipe({
                             recipe: withDependencies({
@@ -471,6 +483,16 @@ function convertBakeryCookingPotToFDCooking(recipe, mod) {
 function convertBakeryBowlToCreateMixer(recipe, mod) {
     const createRecipe = {
         type: "create:mixing",
+        results: [recipe.result],
+        ingredients : [],
+    };
+    createRecipe.ingredients.push(...recipe.ingredients);
+    return createRecipe;
+}
+
+function convertBakeryStationToCreateDeployer(recipe, mod) {
+    const createRecipe = {
+        type: "create:deploying",
         results: [recipe.result],
         ingredients : [],
     };
