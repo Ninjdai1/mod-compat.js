@@ -293,7 +293,7 @@ function writeRecipe({recipe, loader, modName, targetMod, targetType, item}) {
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir, { recursive: true });
     }
-    fs.writeFile(`./output/${loader}/${modName}/recipes/${targetMod}/${targetType}/${item}.json`, JSON.stringify(recipe), (err) => {
+    fs.writeFile(`./output/${loader}/${modName}/recipes/${targetMod}/${targetType}/${item}.json`, JSON.stringify(recipe, undefined, 4), (err) => {
         if (err)
             console.log(err);
     });

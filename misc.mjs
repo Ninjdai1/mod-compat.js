@@ -22,7 +22,7 @@ function writeToughAsNails(loader) {
         fs.mkdirSync(dir, { recursive: true });
     }
     for(const value of Object.keys(hydration_values)){
-        fs.writeFile(`${dir}/${value}0_hydration_drinks.json`, JSON.stringify({replace: false, values: hydration_values[value]}), (err) => {
+        fs.writeFile(`${dir}/${value}0_hydration_drinks.json`, JSON.stringify({replace: false, values: hydration_values[value]}, undefined, 4), (err) => {
             if (err)
                 console.log(err);
         });
@@ -45,7 +45,7 @@ function writeDehydration(loader){
                 hydration_values[value].push({ id: item, required: false });
             }
         }
-        fs.writeFile(`${dir}/${mod}_items.json`, JSON.stringify(hydration_values), (err) => {
+        fs.writeFile(`${dir}/${mod}_items.json`, JSON.stringify(hydration_values, undefined, 4), (err) => {
             if (err)
                 console.log(err);
         });
