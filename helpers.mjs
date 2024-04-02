@@ -2,15 +2,14 @@ import fs from "fs";
 import path from "path";
 import { getData } from "./util/mc/datapack.mjs";
 
-function loadData(){
+function loadData(loader){
     const modData = {};
     const mods = fs
-        .readdirSync(path.resolve("./mods/"))
+        .readdirSync(path.resolve(`./mods/${loader}`))
         .filter((file) => file.endsWith(".jar") || file.endsWith(".zip"));
     for (const mod of mods) {
-        modData[mod.split(".")[0]] = getData(`./mods/${mod}`)
+        modData[mod.split(".")[0]] = getData(`./mods/${loader}/${mod}`)
     }
-    //console.log(modData)
     return modData;
 }
 

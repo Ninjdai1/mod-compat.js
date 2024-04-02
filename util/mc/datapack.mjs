@@ -2,6 +2,7 @@ import path from 'path'
 import { readZipArchive } from '../zip/read.mjs';
 import { getRecipesFromFiles } from './recipes.mjs';
 import { getLangsFromFiles } from './lang.mjs';
+import { getTagsFromFiles } from './tags.mjs';
 
 function getData(filepath){
     const data = {};
@@ -19,6 +20,7 @@ function getData(filepath){
     }
 
     data.recipes = getRecipesFromFiles(dataFiles);
+    data.tags = getTagsFromFiles(dataFiles);
     data.langs = {}//getLangsFromFiles(dataFiles);
 
     return data

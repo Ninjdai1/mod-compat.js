@@ -1,10 +1,16 @@
 import { loadData } from "./helpers.mjs";
 import { generateRecipes } from "./recipes.mjs";
 import fs from "fs";
-const modsData = loadData();
+import path from "path";
 
-generateRecipes(modsData);
-fs.cp('./custom/', './output/', {recursive: true}, (err) => {
-    if(err)
-        console.error(err)
-});
+
+const loaders = fs.readdirSync(path.resolve(`./mods/`));
+for(const loader of loaders){
+    const modsData = loadData(loader);
+    generateRecipes(modsData, loader);
+    fs.cp('./custom/', `./output/${loader}`, {recursive: true}, (err) => {
+        if(err)
+            console.error(err)
+    });
+}
+
