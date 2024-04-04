@@ -8,6 +8,7 @@ function generateMiscData(loader){
             writeDehydration(loader);
             break;
         case "forge":
+        case "neoforge":
             writeToughAsNails(loader);
             break;
     }

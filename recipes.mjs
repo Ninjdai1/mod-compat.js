@@ -267,22 +267,25 @@ function getIdFromRecipe(recipe){
     return itemId;
 }
 
-function withDependencies({recipe, mods=["minecraft"]}) {
+function withDependencies({loader, recipe, mods=["minecraft"]}) {
     const uniq = [...new Set(mods)];
-    recipe["fabric:load_conditions"] = [
-        {
-            condition: "fabric:all_mods_loaded",
-            values: uniq
-        }
-    ]
-    recipe.conditions = []
-    for (const mod of uniq) {
-        recipe.conditions.push(
+    if(loader=="fabric"){
+        recipe["fabric:load_conditions"] = [
             {
-                type: "forge:mod_loaded",
-                modid: mod
+                condition: "fabric:all_mods_loaded",
+                values: uniq
             }
-        )
+        ]
+    } else if(loader=="forge" || loader=="neoforge"){
+        recipe.conditions = []
+        for (const mod of uniq) {
+            recipe.conditions.push(
+                {
+                    type: `${loader}:mod_loaded`,
+                    modid: mod
+                }
+            )
+        }
     }
     return recipe;
 }
