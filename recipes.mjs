@@ -191,6 +191,18 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         break;
+                    case "farm_and_charm:crafting_bowl":
+                        writeRecipe({loader:loader,
+                            recipe: withDependencies({
+                                recipe: convertFarmAndCharmBowlToCreateMixer(recipe, mod),
+                                mods: [mod, itemMod, "create"],
+                            }),
+                            modName: mod,
+                            targetMod: "create",
+                            targetType: "mixing",
+                            item: item
+                        })
+                        break;
                     case "youkaishomecoming:kettle":
                         writeRecipe({loader:loader,
                             recipe: withDependencies({
@@ -212,6 +224,48 @@ function generateRecipes(modsData, loader){
                             modName: mod,
                             targetMod: "youkaishomecoming",
                             targetType: "kettle",
+                            item: item
+                        })
+                        break;
+                    case "farm_and_charm:pot_cooking":
+                        writeRecipe({loader:loader,
+                            recipe: withDependencies({
+                                recipe: convertBakeryCookingPotToFDCooking(recipe, mod),
+                                mods: [mod, itemMod, "farmersdelight"],
+                            }),
+                            modName: mod,
+                            targetMod: "farmersdelight",
+                            targetType: "cooking",
+                            item: item
+                        })
+                        writeRecipe({loader:loader,
+                            recipe: withDependencies({
+                                recipe: convertBakeryCookingPotToMeadowCookingPot(recipe, mod),
+                                mods: [mod, itemMod, "meadow"],
+                            }),
+                            modName: mod,
+                            targetMod: "meadow",
+                            targetType: "cooking",
+                            item: item
+                        })
+                        writeRecipe({loader:loader,
+                            recipe: withDependencies({
+                                recipe: convertBakeryCookingPotToCandlelightCookingPot(recipe, mod),
+                                mods: [mod, itemMod, "candlelight"],
+                            }),
+                            modName: mod,
+                            targetMod: "candlelight",
+                            targetType: "pot_cooking",
+                            item: item
+                        })
+                        writeRecipe({loader:loader,
+                            recipe: withDependencies({
+                                recipe: convertCandlelightCookingPotToBakeryCookingPot(recipe, mod),
+                                mods: [mod, itemMod, "bakery"],
+                            }),
+                            modName: mod,
+                            targetMod: "bakery",
+                            targetType: "pot_cooking",
                             item: item
                         })
                         break;
@@ -480,6 +534,16 @@ function convertBakeryCookingPotToFDCooking(recipe, mod) {
 }
 
 function convertBakeryBowlToCreateMixer(recipe, mod) {
+    const createRecipe = {
+        type: "create:mixing",
+        results: [recipe.result],
+        ingredients : [],
+    };
+    createRecipe.ingredients.push(...recipe.ingredients);
+    return createRecipe;
+}
+
+function convertFarmAndCharmBowlToCreateMixer(recipe, mod) {
     const createRecipe = {
         type: "create:mixing",
         results: [recipe.result],
