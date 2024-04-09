@@ -318,13 +318,15 @@ function convertFDCookingToMeadowCookingPot(recipe, mod) {
 }
 
 function convertFDCookingToBakeryCookingPot(recipe, mod) {
-    const meadowRecipe = {
+    const bakeryRecipe = {
         type: "bakery:pot_cooking",
         result: recipe.result,
         ingredients : [],
     };
-    meadowRecipe.ingredients.push(...recipe.ingredients);
-    return meadowRecipe;
+    bakeryRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container) bakeryRecipe.container = recipe.container;
+    if(!bakeryRecipe.container) bakeryRecipe.container = {item: "minecraft:air"};
+    return bakeryRecipe;
 }
 
 function convertFDCookingToCandlelightCookingPot(recipe, mod) {
@@ -335,6 +337,7 @@ function convertFDCookingToCandlelightCookingPot(recipe, mod) {
     };
     candlelightRecipe.ingredients.push(...recipe.ingredients);
     if(recipe.container) candlelightRecipe.container = recipe.container;
+    if(!candlelightRecipe.container) candlelightRecipe.container = {item: "minecraft:air"};
     return candlelightRecipe;
 }
 
@@ -355,6 +358,8 @@ function convertMeadowCookingPotToBakeryCookingPot(recipe, mod) {
         ingredients : [],
     };
     bakeryRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container) bakeryRecipe.container = recipe.container;
+    if(!bakeryRecipe.container) bakeryRecipe.container = {item: "minecraft:air"};
     return bakeryRecipe;
 }
 
@@ -366,6 +371,7 @@ function convertMeadowCookingPotToCandlelightCookingPot(recipe, mod) {
     };
     candlelightRecipe.ingredients.push(...recipe.ingredients);
     if(recipe.container) candlelightRecipe.container = recipe.container;
+    if(!candlelightRecipe.container) candlelightRecipe.container = {item: "minecraft:air"};
     return candlelightRecipe;
 }
 
@@ -377,6 +383,7 @@ function convertCandlelightCookingPotToBakeryCookingPot(recipe, mod) {
     };
     bakeryRecipe.ingredients.push(...recipe.ingredients);
     if(recipe.container) bakeryRecipe.container = recipe.container;
+    if(!bakeryRecipe.container) bakeryRecipe.container = {item: "minecraft:air"};
     return bakeryRecipe;
 }
 
@@ -455,6 +462,7 @@ function convertBakeryCookingPotToCandlelightCookingPot(recipe, mod) {
     };
     candlelightRecipe.ingredients.push(...recipe.ingredients);
     if(recipe.container) candlelightRecipe.ingredients.push(recipe.container);
+    if(!candlelightRecipe.container) candlelightRecipe.container = {item: "minecraft:air"};
     return candlelightRecipe;
 }
 
