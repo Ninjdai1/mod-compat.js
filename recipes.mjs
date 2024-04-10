@@ -2,6 +2,7 @@ import fs from "fs";
 import { vinery_bushes, cuttables } from "./custom_data.mjs";
 
 function generateRecipes(modsData, loader){
+    console.log(loader);
     for(const mod of Object.keys(modsData)){
         console.log(mod)
         const modData = modsData[mod];
@@ -11,13 +12,13 @@ function generateRecipes(modsData, loader){
             for (let index = 0; index < recipes.length; index++) {
                 const recipe = recipes[index];
 
-                console.log(recipe)
+                //console.log(recipe)
                 const itemId = getIdFromRecipe(recipe)
                 const [itemMod, item] = itemId.split(":");
                 switch (recipe.type) {
                     case "farmersdelight:cooking":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertFDCookingToMeadowCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "meadow"],
                             }),
@@ -27,7 +28,7 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertFDCookingToBakeryCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "bakery"],
                             }),
@@ -37,7 +38,7 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertFDCookingToCandlelightCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "candlelight"],
                             }),
@@ -49,8 +50,8 @@ function generateRecipes(modsData, loader){
                         break;
                     case "meadow:cooking":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
-                                recipe: convertMeadowCookingPotToFDCooking(recipe, mod),
+                            recipe: withDependencies({loader:loader,
+                                recipe: convertLetsDoCookingPotToFDCooking(recipe, mod),
                                 mods: [mod, itemMod, "farmersdelight"],
                             }),
                             modName: mod,
@@ -59,7 +60,7 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertMeadowCookingPotToBakeryCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "bakery"],
                             }),
@@ -69,7 +70,7 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertMeadowCookingPotToCandlelightCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "candlelight"],
                             }),
@@ -81,8 +82,8 @@ function generateRecipes(modsData, loader){
                         break;
                     case "candlelight:pot_cooking":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
-                                recipe: convertCandlelightCookingPotToFDCookingPot(recipe, mod),
+                            recipe: withDependencies({loader:loader,
+                                recipe: convertLetsDoCookingPotToFDCooking(recipe, mod),
                                 mods: [mod, itemMod, "farmersdelight"],                                                                                                        
                             }),
                             modName: mod,
@@ -91,7 +92,7 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertCandlelightCookingPotToBakeryCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "bakery"],
                             }),
@@ -101,7 +102,7 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertCandlelightCookingPotToMeadowCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "meadow"],
                             }),
@@ -113,7 +114,7 @@ function generateRecipes(modsData, loader){
                         break;
                     case "meadow:cheese":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertMeadowCheeseToCreatePress(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
@@ -125,7 +126,7 @@ function generateRecipes(modsData, loader){
                         break;
                     case "vinery:apple_mashing":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertVineryMashToCreatePress(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
@@ -137,7 +138,7 @@ function generateRecipes(modsData, loader){
                         break;
                     case "vinery:wine_fermentation":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertVineryFermentationToCreateMixing(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
@@ -149,8 +150,8 @@ function generateRecipes(modsData, loader){
                         break;
                     case "bakery:pot_cooking":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
-                                recipe: convertBakeryCookingPotToFDCooking(recipe, mod),
+                            recipe: withDependencies({loader:loader,
+                                recipe: convertLetsDoCookingPotToFDCooking(recipe, mod),
                                 mods: [mod, itemMod, "farmersdelight"],
                             }),
                             modName: mod,
@@ -159,7 +160,7 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertBakeryCookingPotToMeadowCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "meadow"],
                             }),
@@ -169,7 +170,7 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertBakeryCookingPotToCandlelightCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "candlelight"],
                             }),
@@ -181,7 +182,7 @@ function generateRecipes(modsData, loader){
                         break;
                     case "bakery:crafting_bowl":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertBakeryBowlToCreateMixer(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
@@ -193,7 +194,7 @@ function generateRecipes(modsData, loader){
                         break;
                     case "farm_and_charm:crafting_bowl":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertFarmAndCharmBowlToCreateMixer(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
@@ -205,7 +206,7 @@ function generateRecipes(modsData, loader){
                         break;
                     case "youkaishomecoming:kettle":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertYoukaishomecomingKettleToHerbalbrewsKettle(recipe, mod),
                                 mods: [mod, itemMod, "herbalbrews"],
                             }),
@@ -217,7 +218,7 @@ function generateRecipes(modsData, loader){
                         break;
                     case "herbalbrews:kettle_brewing":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
+                            recipe: withDependencies({loader:loader,
                                 recipe: convertHerbalbrewsKettleToYoukaishomecomingKettle(recipe, mod),
                                 mods: [mod, itemMod, "youkaishomecoming"],
                             }),
@@ -229,8 +230,8 @@ function generateRecipes(modsData, loader){
                         break;
                     case "farm_and_charm:pot_cooking":
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
-                                recipe: convertBakeryCookingPotToFDCooking(recipe, mod),
+                            recipe: withDependencies({loader:loader,
+                                recipe: convertLetsDoCookingPotToFDCooking(recipe, mod),
                                 mods: [mod, itemMod, "farmersdelight"],
                             }),
                             modName: mod,
@@ -239,8 +240,8 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
-                                recipe: convertBakeryCookingPotToMeadowCookingPot(recipe, mod),
+                            recipe: withDependencies({loader:loader,
+                                recipe: convertFarmAndCharmCookingPotToMeadowCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "meadow"],
                             }),
                             modName: mod,
@@ -249,8 +250,8 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
-                                recipe: convertBakeryCookingPotToCandlelightCookingPot(recipe, mod),
+                            recipe: withDependencies({loader:loader,
+                                recipe: convertFarmAndCharmCookingPotToCandlelightCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "candlelight"],
                             }),
                             modName: mod,
@@ -259,8 +260,8 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         writeRecipe({loader:loader,
-                            recipe: withDependencies({
-                                recipe: convertCandlelightCookingPotToBakeryCookingPot(recipe, mod),
+                            recipe: withDependencies({loader:loader,
+                                recipe: convertFarmAndCharmCookingPotToBakeryCookingPot(recipe, mod),
                                 mods: [mod, itemMod, "bakery"],
                             }),
                             modName: mod,
@@ -279,7 +280,7 @@ function generateRecipes(modsData, loader){
     for(const bush of vinery_bushes){
         const originMod = bush.seed.split(":")[0];
         writeRecipe({loader:loader,
-            recipe: withDependencies({
+            recipe: withDependencies({loader:loader,
                 recipe: vineryBushesToBotanyPots(bush),
                 mods: [originMod, "botanypots"],
             }),
@@ -292,7 +293,7 @@ function generateRecipes(modsData, loader){
     for(const mod of Object.keys(cuttables)){
         for(const recipe of cuttables[mod]){
             writeRecipe({loader:loader,
-                recipe: withDependencies({
+                recipe: withDependencies({loader:loader,
                     recipe: toFarmersDelightCuttable(recipe),
                     mods: [mod, "farmersdelight"],
                 }),
@@ -341,6 +342,8 @@ function withDependencies({loader, recipe, mods=["minecraft"]}) {
             )
         }
     }
+    //console.log(loader)
+    //console.log(recipe);
     return recipe;
 }
 
@@ -395,16 +398,6 @@ function convertFDCookingToCandlelightCookingPot(recipe, mod) {
     return candlelightRecipe;
 }
 
-function convertMeadowCookingPotToFDCooking(recipe, mod) {
-    const FDRecipe = {
-        type: "farmersdelight:cooking",
-        result: recipe.result,
-        ingredients : [],
-    };
-    FDRecipe.ingredients.push(...recipe.ingredients);
-    return FDRecipe;
-}
-
 function convertMeadowCookingPotToBakeryCookingPot(recipe, mod) {
     const bakeryRecipe = {
         type: "bakery:pot_cooking",
@@ -439,17 +432,6 @@ function convertCandlelightCookingPotToBakeryCookingPot(recipe, mod) {
     if(recipe.container) bakeryRecipe.container = recipe.container;
     if(!bakeryRecipe.container) bakeryRecipe.container = {item: "minecraft:air"};
     return bakeryRecipe;
-}
-
-function convertCandlelightCookingPotToFDCookingPot(recipe, mod) {
-    const FDRecipe = {
-        type: "farmersdelight:cooking",
-        result: recipe.result,
-        ingredients : [],
-    };
-    FDRecipe.ingredients.push(...recipe.ingredients);
-    if(recipe.container) FDRecipe.container = recipe.container;
-    return FDRecipe;
 }
 
 function convertCandlelightCookingPotToMeadowCookingPot(recipe, mod) {
@@ -518,19 +500,6 @@ function convertBakeryCookingPotToCandlelightCookingPot(recipe, mod) {
     if(recipe.container) candlelightRecipe.ingredients.push(recipe.container);
     if(!candlelightRecipe.container) candlelightRecipe.container = {item: "minecraft:air"};
     return candlelightRecipe;
-}
-
-function convertBakeryCookingPotToFDCooking(recipe, mod) {
-    const FDRecipe = {
-        type: "farmersdelight:cooking",
-        result: recipe.result,
-        ingredients : [],
-    };
-    if(recipe.container){
-        FDRecipe.ingredients.push(recipe.container);
-    };
-    FDRecipe.ingredients.push(...recipe.ingredients);
-    return FDRecipe;
 }
 
 function convertBakeryBowlToCreateMixer(recipe, mod) {
@@ -629,6 +598,56 @@ function toFarmersDelightCuttable(recipe) {
         }
     }
     return FDRecipe;
+}
+
+function convertLetsDoCookingPotToFDCooking(recipe, mod) {
+    const FDRecipe = {
+        type: "farmersdelight:cooking",
+        result: recipe.result,
+        ingredients : [],
+    };
+    FDRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container){
+        FDRecipe.ingredients.push(recipe.container);
+    };
+    return FDRecipe;
+}
+
+function convertFarmAndCharmCookingPotToBakeryCookingPot(recipe, mod) {
+    const bakeryRecipe = {
+        type: "bakery:pot_cooking",
+        result: recipe.result,
+        ingredients : [],
+    };
+    bakeryRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container) bakeryRecipe.container = recipe.container;
+    if(!bakeryRecipe.container) bakeryRecipe.container = {item: "minecraft:air"};
+    return bakeryRecipe;
+}
+
+function convertFarmAndCharmCookingPotToCandlelightCookingPot(recipe, mod) {
+    const candlelightRecipe = {
+        type: "candlelight:pot_cooking",
+        result: recipe.result,
+        ingredients : [],
+    };
+    candlelightRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container) candlelightRecipe.container = recipe.container;
+    if(!candlelightRecipe.container) candlelightRecipe.container = {item: "minecraft:air"};
+    return candlelightRecipe;
+}
+
+function convertFarmAndCharmCookingPotToMeadowCookingPot(recipe, mod) {
+    const meadowRecipe = {
+        type: "meadow:cooking",
+        result: recipe.result,
+        ingredients : [],
+    };
+    meadowRecipe.ingredients.push(...recipe.ingredients);
+    if(recipe.container){
+        meadowRecipe.ingredients.push(recipe.container);
+    };
+    return meadowRecipe;
 }
 
 export { generateRecipes }

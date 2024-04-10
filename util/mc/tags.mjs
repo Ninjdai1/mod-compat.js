@@ -4,11 +4,11 @@ function getTagsFromFiles(files){
     for (const path in files) {
         if (files.hasOwnProperty(path) && path.includes("/tags/") && path.endsWith(".json")) {
             let json = JSON.parse(files[path].toString());
-            console.log(json)
+            //console.log(json)
             const tagName = path.split("/tags/")[1].replace(".json","");
             const origin = path.split("/")[1]
             const tag = `#${origin}:${tagName}`
-            console.log(tag)
+            //console.log(tag)
 
             if(!tag){
                 continue;
