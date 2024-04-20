@@ -211,6 +211,67 @@ const cuttables = {
     ]
 }
 
+const botanypots = {
+    trees: {
+        bloomingnature: [
+            {
+                seed: "bloomingnature:larch_sapling",
+                block: "bloomingnature:larch_sapling",
+                item: "bloomingnature:larch_log",
+                categories: ["dirt"],
+            },
+            {
+                seed: "bloomingnature:baobab_sapling",
+                block: "bloomingnature:baobab_sapling",
+                item: "bloomingnature:baobab_log",
+                categories: ["dirt"],
+            },
+            {
+                seed: "bloomingnature:swamp_oak_sapling",
+                block: "bloomingnature:swamp_oak_sapling",
+                item: "bloomingnature:swamp_oak_log",
+                categories: ["dirt"],
+            },
+            {
+                seed: "bloomingnature:aspen_sapling",
+                block: "bloomingnature:aspen_sapling",
+                item: "bloomingnature:aspen_log",
+                categories: ["dirt"],
+            },
+            {
+                seed: "bloomingnature:palm_sapling",
+                block: "bloomingnature:palm_sapling",
+                item: "bloomingnature:palm_log",
+                categories: ["dirt"],
+            },
+            {
+                seed: "bloomingnature:fir_sapling",
+                block: "bloomingnature:fir_sapling",
+                item: "bloomingnature:fir_log",
+                categories: ["dirt"],
+            },
+            {
+                seed: "bloomingnature:swamp_cypress_sapling",
+                block: "bloomingnature:swamp_cypress_sapling",
+                item: "bloomingnature:swamp_cypress_log",
+                categories: ["dirt"],
+            },
+            {
+                seed: "bloomingnature:ebony_sapling",
+                block: "bloomingnature:ebony_sapling",
+                item: "bloomingnature:ebony_log",
+                categories: ["dirt"],
+            },
+            {
+                seed: "bloomingnature:chestnut_sapling",
+                block: "bloomingnature:chestnut_sapling",
+                item: "bloomingnature:chestnut_log",
+                categories: ["dirt"],
+            }
+        ]
+    }
+}
+
 const vinery_bushes = [
     {
         seed: "vinery:red_grape_seeds",
@@ -274,4 +335,4 @@ const vinery_bushes = [
     },
 ];
 
-export { hydration, vinery_bushes, cuttables, data };
+export { hydration, vinery_bushes, cuttables, data, botanypots };
