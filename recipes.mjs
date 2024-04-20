@@ -279,11 +279,35 @@ function convertFLDCookingPotToFLDCookingPot(recipe, mod) {
         result: recipe.result,
         ingredients : [],
     };
-    LDRecipe.ingredients.push(...recipe.ingredients);
     if(recipe.container) LDRecipe.container = recipe.container;
+    
+    for(const ingredient of recipe.ingredients){
+        if(!LDRecipe.container && isContainer(ingredient)) LDRecipe.container = ingredient;
+        else LDRecipe.ingredients.push(ingredient);
+    }
     if(!LDRecipe.container) LDRecipe.container = {item: "minecraft:air"};
     return LDRecipe;
 }
+function isContainer(ingredient){
+    return  [
+        "createfood:cacao_mass_bucket",
+        "farmersdelight:milk_bottle",
+        "farmersdelight:nether_salad",
+        "farmersdelight:tomato_sauce",
+        "minecraft:bowl",
+        "minecraft:glass_bottle",
+        "minecraft:milk_bucket",
+        "minecraft:water_bucket",
+        "ubesdelight:condensed_milk_bottle",
+        "ubesdelight:fish_sauce_bottle",
+    ].includes(ingredient.item) || [
+        "c:milk",
+        "c:milks",
+        "meadow:milk",
+        "meadow:water_bottles"
+    ].includes(ingredient.tag)
+}
+
 
 function convertMeadowCheeseToCreatePress(recipe, mod){
     const createRecipe = {
