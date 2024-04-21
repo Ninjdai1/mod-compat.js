@@ -1,3 +1,29 @@
+const containers = {
+    items: [
+        "createfood:cacao_mass_bucket",
+        "farmersdelight:milk_bottle",
+        "farmersdelight:nether_salad",
+        "farmersdelight:tomato_sauce",
+        "meadow:wooden_bucket",
+        "minecraft:bowl",
+        "minecraft:glass_bottle",
+        "minecraft:honey_bottle",
+        "minecraft:milk_bucket",
+        "minecraft:water_bucket",
+        "minecraft:suspicious_stew",
+        "minecraft:dragon_breath",
+        "ubesdelight:condensed_milk_bottle",
+        "ubesdelight:fish_sauce_bottle",
+        "ubesdelight:sinangag",
+    ],
+    tags: [
+        "c:milk",
+        "c:milks",
+        "meadow:milk",
+        "meadow:water_bottles"
+    ]
+}
+
 const itemList = {
     vinery: {
         wines: [
@@ -55,4 +81,4 @@ const itemList = {
 }
 
 
-export { itemList };
+export { itemList, containers };

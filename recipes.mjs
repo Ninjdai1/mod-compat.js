@@ -1,5 +1,6 @@
 import fs from "fs";
 import { vinery_bushes, cuttables, botanypots } from "./data/custom_recipes.mjs";
+import { containers } from "./data/custom_data.mjs";
 
 function generateRecipes(modsData, loader){
     console.log(loader);
@@ -281,28 +282,7 @@ function convertFLDCookingPotToFLDCookingPot(recipe, mod) {
     return LDRecipe;
 }
 function isContainer(ingredient){
-    return  [
-        "createfood:cacao_mass_bucket",
-        "farmersdelight:milk_bottle",
-        "farmersdelight:nether_salad",
-        "farmersdelight:tomato_sauce",
-        "meadow:wooden_bucket",
-        "minecraft:bowl",
-        "minecraft:glass_bottle",
-        "minecraft:honey_bottle",
-        "minecraft:milk_bucket",
-        "minecraft:water_bucket",
-        "minecraft:suspicious_stew",
-        "minecraft:dragon_breath",
-        "ubesdelight:condensed_milk_bottle",
-        "ubesdelight:fish_sauce_bottle",
-        "ubesdelight:sinangag",
-    ].includes(ingredient.item) || [
-        "c:milk",
-        "c:milks",
-        "meadow:milk",
-        "meadow:water_bottles"
-    ].includes(ingredient.tag)
+    return containers.items.includes(ingredient.item) || containers.tags.includes(ingredient.tag)
 }
 
 
