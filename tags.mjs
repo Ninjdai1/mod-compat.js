@@ -1,7 +1,7 @@
-import { hydration } from "./custom_data.mjs";
+import { hydration } from "./data/custom_tags.mjs";
 import fs from "fs";
 
-function generateMiscData(loader){
+function generateTagData(loader){
     switch(loader){
         case "fabric":
             writeToughAsNails(loader);
@@ -67,4 +67,4 @@ function mergedHydrationData(){
     return hydration_values;
 }
 
-export { generateMiscData };
+export { generateTagData };

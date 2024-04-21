@@ -1,5 +1,5 @@
 import fs from "fs";
-import { vinery_bushes, cuttables, botanypots } from "./custom_data.mjs";
+import { vinery_bushes, cuttables, botanypots } from "./data/custom_recipes.mjs";
 
 function generateRecipes(modsData, loader){
     console.log(loader);
