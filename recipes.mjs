@@ -17,26 +17,10 @@ function generateRecipes(modsData, loader){
                 const [itemMod, item] = itemId.split(":");
                 switch (recipe.type) {
                     case "farmersdelight:cooking":
-                        writeFLDCookingPotRecipeToFLDCookingPot({
-                            loader: loader,
-                            index: index,
-                            recipe: recipe,
-                            mod: mod,
-                            item: item,
-                            itemMod: itemMod
-                        });
-                        break;
                     case "meadow:cooking":
-                        writeFLDCookingPotRecipeToFLDCookingPot({
-                            loader: loader,
-                            index: index,
-                            recipe: recipe,
-                            mod: mod,
-                            item: item,
-                            itemMod: itemMod
-                        });
-                        break;
                     case "candlelight:pot_cooking":
+                    case "bakery:pot_cooking":
+                    case "farm_and_charm:pot_cooking":
                         writeFLDCookingPotRecipeToFLDCookingPot({
                             loader: loader,
                             index: index,
@@ -47,8 +31,12 @@ function generateRecipes(modsData, loader){
                         });
                         break;
                     case "meadow:cheese":
-                        writeRecipe({loader:loader, index:index,
-                            recipe: withDependencies({loader:loader, index:index,
+                        writeRecipe({
+                            loader:loader,
+                            index:index,
+                            recipe: withDependencies({
+                                loader:loader,
+                                index:index,
                                 recipe: convertMeadowCheeseToCreatePress(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
@@ -59,8 +47,12 @@ function generateRecipes(modsData, loader){
                         })
                         break;
                     case "vinery:apple_mashing":
-                        writeRecipe({loader:loader, index:index,
-                            recipe: withDependencies({loader:loader, index:index,
+                        writeRecipe({
+                            loader:loader,
+                            index:index,
+                            recipe: withDependencies({
+                                loader:loader,
+                                index:index,
                                 recipe: convertVineryMashToCreatePress(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
@@ -71,8 +63,12 @@ function generateRecipes(modsData, loader){
                         })
                         break;
                     case "vinery:wine_fermentation":
-                        writeRecipe({loader:loader, index:index,
-                            recipe: withDependencies({loader:loader, index:index,
+                        writeRecipe({
+                            loader:loader, 
+                            index:index,
+                            recipe: withDependencies({
+                                loader:loader, 
+                                index:index,
                                 recipe: convertVineryFermentationToCreateMixing(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
@@ -82,19 +78,13 @@ function generateRecipes(modsData, loader){
                             item: item
                         })
                         break;
-                    case "bakery:pot_cooking":
-                        writeFLDCookingPotRecipeToFLDCookingPot({
-                            loader: loader,
-                            index: index,
-                            recipe: recipe,
-                            mod: mod,
-                            item: item,
-                            itemMod: itemMod
-                        });
-                        break;
                     case "bakery:crafting_bowl":
-                        writeRecipe({loader:loader, index:index,
-                            recipe: withDependencies({loader:loader, index:index,
+                        writeRecipe({
+                            loader:loader, 
+                            index:index,
+                            recipe: withDependencies({
+                                loader:loader, 
+                                index:index,
                                 recipe: convertBakeryBowlToCreateMixer(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
@@ -105,8 +95,12 @@ function generateRecipes(modsData, loader){
                         })
                         break;
                     case "farm_and_charm:crafting_bowl":
-                        writeRecipe({loader:loader, index:index,
-                            recipe: withDependencies({loader:loader, index:index,
+                        writeRecipe({
+                            loader:loader, 
+                            index:index,
+                            recipe: withDependencies({
+                                loader:loader, 
+                                index:index,
                                 recipe: convertFarmAndCharmBowlToCreateMixer(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
@@ -117,8 +111,12 @@ function generateRecipes(modsData, loader){
                         })
                         break;
                     case "youkaishomecoming:kettle":
-                        writeRecipe({loader:loader, index:index,
-                            recipe: withDependencies({loader:loader, index:index,
+                        writeRecipe({
+                            loader:loader, 
+                            index:index,
+                            recipe: withDependencies({
+                                loader:loader, 
+                                index:index,
                                 recipe: convertYoukaishomecomingKettleToHerbalbrewsKettle(recipe, mod),
                                 mods: [mod, itemMod, "herbalbrews"],
                             }),
@@ -129,8 +127,12 @@ function generateRecipes(modsData, loader){
                         })
                         break;
                     case "herbalbrews:kettle_brewing":
-                        writeRecipe({loader:loader, index:index,
-                            recipe: withDependencies({loader:loader, index:index,
+                        writeRecipe({
+                            loader:loader,
+                            index:index,
+                            recipe: withDependencies({
+                                loader:loader,
+                                index:index,
                                 recipe: convertHerbalbrewsKettleToYoukaishomecomingKettle(recipe, mod),
                                 mods: [mod, itemMod, "youkaishomecoming"],
                             }),
@@ -139,16 +141,6 @@ function generateRecipes(modsData, loader){
                             targetType: "kettle",
                             item: item
                         })
-                        break;
-                    case "farm_and_charm:pot_cooking":
-                        writeFLDCookingPotRecipeToFLDCookingPot({
-                            loader: loader,
-                            index: index,
-                            recipe: recipe,
-                            mod: mod,
-                            item: item,
-                            itemMod: itemMod
-                        });
                         break;
 
                     default:
