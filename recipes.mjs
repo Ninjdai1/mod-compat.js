@@ -266,6 +266,9 @@ function writeFLDCookingPotRecipeToFLDCookingPot({loader, index, recipe, mod, it
             
     }
 }
+
+const NO_CONTAINER_MODS = ["meadow"];
+
 function convertFLDCookingPotToFLDCookingPot(recipe, mod) {
     const LDRecipe = {
         type: `${mod}:${mod != "meadow" ? "pot_" : ""}cooking`,
@@ -275,10 +278,10 @@ function convertFLDCookingPotToFLDCookingPot(recipe, mod) {
     if(recipe.container) LDRecipe.container = recipe.container;
     
     for(const ingredient of recipe.ingredients){
-        if(!LDRecipe.container && isContainer(ingredient)) LDRecipe.container = ingredient;
+        if(!LDRecipe.container && isContainer(ingredient) && !(NO_CONTAINER_MODS.includes(mod))) LDRecipe.container = ingredient;
         else LDRecipe.ingredients.push(ingredient);
     }
-    if(!LDRecipe.container) LDRecipe.container = {item: "minecraft:air"};
+    if(!LDRecipe.container && !(NO_CONTAINER_MODS.includes(mod))) LDRecipe.container = {item: "minecraft:air"};
     return LDRecipe;
 }
 function isContainer(ingredient){
