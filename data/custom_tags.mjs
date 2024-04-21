@@ -1,5 +1,33 @@
 import { itemList } from "./custom_data.mjs";
 
+const ingredient_tags_replacement = {
+    "": ""
+};
+
+const custom_tags = {
+    items: {
+        "cheeses.json": [
+            "#$loader$:cheese"
+        ],
+        tools: {
+            knives: []
+        },
+        cheeses: {
+            nether: [
+                "meadow:piece_of_warped_cheese"
+            ],
+            normal: [
+                "meadow:piece_of_cheese",
+                "meadow:piece_of_sheep_cheese",
+                "meadow:piece_of_grain_cheese",
+                "meadow:piece_of_amethyst_cheese",
+                "meadow:piece_of_buffalo_cheese",
+                "meadow:piece_of_goat_cheese"
+            ]
+        }
+    }
+}
+
 const hydration = {
     beachparty: {
         1: [
@@ -82,4 +110,4 @@ const hydration = {
     }
 }
 
-export { hydration }
+export { hydration, ingredient_tags_replacement, custom_tags }

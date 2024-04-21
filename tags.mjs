@@ -1,5 +1,6 @@
-import { hydration } from "./data/custom_tags.mjs";
+import { hydration, ingredient_tags_replacement, custom_tags } from "./data/custom_tags.mjs";
 import fs from "fs";
+import path from "path";
 
 function generateTagData(loader){
     switch(loader){
@@ -12,6 +13,42 @@ function generateTagData(loader){
             writeToughAsNails(loader);
             break;
     }
+    for(const file of iterate(custom_tags, loader)){
+        if (!fs.existsSync(file.dir)){
+            fs.mkdirSync(path.resolve(file.dir), { recursive: true });
+        }
+        fs.writeFile(`${file.dir}/${file.name}`, JSON.stringify({replace: false, values: file.values}, undefined, 4), (err) => {
+            if (err)
+                console.log(err);
+        });
+    }
+}
+
+function ingredientToTag(ingredient){
+    if(ingredient.item && ingredient_tags_replacement[ingredient.item]) {
+        return {
+            tag: ingredient_tags_replacement[ingredient.item]
+        }
+    }
+}
+
+function iterate(obj, loader, path=`./output/${loader}/${loader=="forge" ? "forge" : "c"}/tags`, output=[]) {
+    for (var property in obj) {
+        if (obj.hasOwnProperty(property)) {
+            if (typeof obj[property] == "object" && !Array.isArray(obj[property])) {
+                iterate(obj[property], loader, path + '/' + property, output);
+            } else {
+                output.push({
+                    dir: `${path}/`,
+                    name: property.replaceAll("$loader$", loader=="forge" ? "forge" : "c").replaceAll(".json", "")+".json",
+                    values: obj[property].map(e => { 
+                        return e.replaceAll("$loader$", loader=="forge" ? "forge" : "c")
+                    })
+                })
+            }
+        }
+    }
+    return output
 }
 
 function writeToughAsNails(loader) {
@@ -67,4 +104,4 @@ function mergedHydrationData(){
     return hydration_values;
 }
 
-export { generateTagData };
+export { generateTagData }

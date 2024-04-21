@@ -10,9 +10,9 @@ for(const loader of loaders){
     const modsData = loadData(loader);
     generateRecipes(modsData, loader);
     generateTagData(loader);
-    fs.cp('./custom/', `./output/${loader}`, {recursive: true}, (err) => {
+    /*fs.cp('./custom/', `./output/${loader}`, {recursive: true}, (err) => {
         if(err)
             console.error(err)
-    });
+    });*/
 }
 
