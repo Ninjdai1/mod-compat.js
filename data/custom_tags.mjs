@@ -145,6 +145,9 @@ const custom_tags = {
             "meadow:alpine_salt",
             "croptopia:salt",
             "vegandelight:salt",
+        ],
+        milks: [
+            "#meadow:milk"
         ]
     }
 }
