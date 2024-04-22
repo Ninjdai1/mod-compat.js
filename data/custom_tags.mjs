@@ -172,10 +172,10 @@ const RAW_MEATS = ["raw_fishes", "raw_chicken", "raw_pork", "raw_beef", "raw_mut
 const VANILLA_CROPS = ["beetroot", "carrot", "potato"]
 
 const MODDED_CROPS = {
-    crops: ["garlic"],
-    vegetables: ["tomato", "cabbage", "eggplant", "lettuce"],
+    crops: ["coconut"],
+    vegetables: ["cabbage", "cucumber", "eggplant", "garlic", "lettuce", "tomato"],
     grain: ["rice"],
-    fruits: ["strawberries", "blueberries", "blackberries", "raspberries", "pineapple"]
+    fruits: ["blueberries", "blackberries", "pineapple", "raspberries", "strawberries"]
 }
 
 for(const meat of RAW_MEATS){
