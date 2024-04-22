@@ -31,6 +31,9 @@ const ingredient_tags_replacement = (loaderid) => {
             "croptopia:garlic": `${loaderid}:crops/garlic`,
             "farmersdelight:tomato": `${loaderid}:crops/tomato`,
             "culturaldelights:regular_eggplants": `${loaderid}:crops/eggplant`,
+            "croptopia:eggplant": `${loaderid}:crops/eggplant`,
+            "croptopia:lettuce": `${loaderid}:crops/lettuce`,
+            "candlelight:lettuce": `${loaderid}:crops/lettuce`,
 
             "farmersdelight:rice": `${loaderid}:grain/rice`,
 
@@ -148,7 +151,8 @@ const custom_tags = {
             rice: ["#$loader$:grain/rice", "#$loader$:rice"],
             tomato: ["#candlelight:crops/tomato", "farmersdelight:tomato"],
             cabbage: ["#$loader$:cabbage", "croptopia:cabbage"],
-            eggplant: ["#$loader$:eggplant", "culturaldelights:regular_eggplants", "croptopia:eggplant"]
+            eggplant: ["#$loader$:eggplant", "culturaldelights:regular_eggplants", "croptopia:eggplant"],
+            lettuce: ["#$loader$:lettuce", "candlelight:lettuce", "croptopia:lettuce"]
         },
         vegetables: {
             garlic: ["croptopia:garlic"]
@@ -170,6 +174,7 @@ const custom_tags = {
         pineapple: ["#$loader$:fruits/pineapple"],
         cabbage: ["#$loader$:crops/cabbage"],
         eggplant: ["#$loader$:crops/eggplant"],
+        lettuce: ["#$loader$:crops/lettuce"]
     }
 }
 
