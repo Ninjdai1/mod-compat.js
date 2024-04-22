@@ -1,6 +1,7 @@
 import fs from "fs";
 import { vinery_bushes, cuttables, botanypots } from "./data/custom_recipes.mjs";
 import { containers } from "./data/custom_data.mjs";
+import { ingredientToTag } from "./tags.mjs";
 
 function generateRecipes(modsData, loader){
     console.log(loader);
@@ -255,7 +256,7 @@ function writeFLDCookingPotRecipeToFLDCookingPot({loader, index, recipe, mod, it
                 loader:loader,
                 index:index,
                 recipe: withDependencies({loader:loader, index:index,
-                    recipe: convertFLDCookingPotToFLDCookingPot(recipe, LDMOD),
+                    recipe: convertFLDCookingPotToFLDCookingPot(recipe, LDMOD, loader),
                     mods: [mod, itemMod, LDMOD],
                 }),
                 modName: mod,
@@ -269,7 +270,7 @@ function writeFLDCookingPotRecipeToFLDCookingPot({loader, index, recipe, mod, it
 
 const NO_CONTAINER_MODS = ["meadow"];
 
-function convertFLDCookingPotToFLDCookingPot(recipe, mod) {
+function convertFLDCookingPotToFLDCookingPot(recipe, mod, loader) {
     const LDRecipe = {
         type: `${mod}:${mod != "meadow" ? "pot_" : ""}cooking`,
         result: recipe.result,
@@ -279,7 +280,7 @@ function convertFLDCookingPotToFLDCookingPot(recipe, mod) {
     
     for(const ingredient of recipe.ingredients){
         if(!LDRecipe.container && isContainer(ingredient) && !(NO_CONTAINER_MODS.includes(mod))) LDRecipe.container = ingredient;
-        else LDRecipe.ingredients.push(ingredient);
+        else LDRecipe.ingredients.push(ingredientToTag(ingredient, loader));
     }
     if(!LDRecipe.container && !(NO_CONTAINER_MODS.includes(mod))) LDRecipe.container = {item: "minecraft:air"};
     return LDRecipe;

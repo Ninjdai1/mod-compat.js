@@ -24,11 +24,17 @@ function generateTagData(loader){
     }
 }
 
-function ingredientToTag(ingredient){
-    if(ingredient.item && ingredient_tags_replacement[ingredient.item]) {
+function ingredientToTag(ingredient, loader){
+    const loader_id = loader=="forge" ? loader : "c";
+    const noLauncherName = (ingredient.item ? ingredient.item : ingredient.tag ? ingredient.tag.replace(loader_id, "$loader$") : "")
+    const name_replacements = ingredient_tags_replacement(loader_id);
+
+    if(ingredient.item && name_replacements.items[noLauncherName]) {
         return {
-            tag: ingredient_tags_replacement[ingredient.item]
-        }
+            tag: name_replacements.items[ingredient.item]
+        };
+    } else {
+        return ingredient;
     }
 }
 
@@ -42,7 +48,10 @@ function iterate(obj, loader, path=`./output/${loader}/${loader=="forge" ? "forg
                     dir: `${path}/`,
                     name: property.replaceAll("$loader$", loader=="forge" ? "forge" : "c").replaceAll(".json", "")+".json",
                     values: obj[property].map(e => { 
-                        return e.replaceAll("$loader$", loader=="forge" ? "forge" : "c")
+                        return {
+                            id: e.replaceAll("$loader$", loader=="forge" ? "forge" : "c"),
+                            required: false,
+                        }
                     })
                 })
             }
@@ -104,4 +113,4 @@ function mergedHydrationData(){
     return hydration_values;
 }
 
-export { generateTagData }
+export { generateTagData, ingredientToTag }

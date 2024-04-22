@@ -19,6 +19,7 @@ const containers = {
     tags: [
         "c:milk",
         "c:milks",
+        "c:water_buckets",
         "meadow:milk",
         "meadow:water_bottles"
     ]
