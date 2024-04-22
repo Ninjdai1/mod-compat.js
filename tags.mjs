@@ -31,11 +31,11 @@ function ingredientToTag(ingredient, loader){
 
     if(ingredient.item && name_replacements.items[noLauncherName]) {
         return {
-            tag: name_replacements.items[ingredient.item]
+            tag: name_replacements.items[noLauncherName]
         };
     } else if(ingredient.tag && name_replacements.tags[noLauncherName]) {
         return {
-            tag: name_replacements.tags[ingredient.tag]
+            tag: name_replacements.tags[noLauncherName]
         };
     } else {
         return ingredient;

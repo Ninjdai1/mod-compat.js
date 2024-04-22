@@ -7,8 +7,10 @@ const ingredient_tags_replacement = (loaderid) => {
 
             "candlelight:pasta": `${loaderid}:food/pastas`,
 
-            "#candlelight:crops/tomato": `${loaderid}:crops/tomato`,
-            "$launcher$:rice": `${loaderid}:grain/rice`,
+            "candlelight:crops/tomato": `${loaderid}:crops/tomato`,
+            "$loader$:cabbage": `${loaderid}:crops/cabbage`,
+            
+            "$loader$:rice": `${loaderid}:grain/rice`,
         },
         items: {
             "farmersdelight:raw_pasta": `${loaderid}:food/raw_pasta`,
@@ -143,7 +145,8 @@ const custom_tags = {
         crops: {
             garlic: ["croptopia:garlic"],
             rice: ["#$loader$:grain/rice", "#$loader$:rice"],
-            tomato: ["#candlelight:crops/tomato", "farmersdelight:tomato"]
+            tomato: ["#candlelight:crops/tomato", "farmersdelight:tomato"],
+            cabbage: ["#$loader$:cabbage"]
         },
         vegetables: {
             garlic: ["croptopia:garlic"]
@@ -162,7 +165,8 @@ const custom_tags = {
         milks: [
             "#meadow:milk"
         ],
-        pineapples: ["#$loader$:fruits/pineapple"]
+        pineapple: ["#$loader$:fruits/pineapple"],
+        cabbage: ["$loader$:crops/cabbage"]
     }
 }
 
