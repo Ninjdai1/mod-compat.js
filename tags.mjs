@@ -26,12 +26,16 @@ function generateTagData(loader){
 
 function ingredientToTag(ingredient, loader){
     const loader_id = loader=="forge" ? loader : "c";
-    const noLauncherName = (ingredient.item ? ingredient.item : ingredient.tag ? ingredient.tag.replace(loader_id, "$loader$") : "")
+    const noLauncherName = (ingredient.item ? ingredient.item : ingredient.tag ? ingredient.tag.replace(`${loader_id}:`, "$loader$:") : "")
     const name_replacements = ingredient_tags_replacement(loader_id);
 
     if(ingredient.item && name_replacements.items[noLauncherName]) {
         return {
             tag: name_replacements.items[ingredient.item]
+        };
+    } else if(ingredient.tag && name_replacements.tags[noLauncherName]) {
+        return {
+            tag: name_replacements.tags[ingredient.tag]
         };
     } else {
         return ingredient;

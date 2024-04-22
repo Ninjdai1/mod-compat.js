@@ -2,7 +2,14 @@ import { itemList } from "./custom_data.mjs";
 
 const ingredient_tags_replacement = (loaderid) => {
     return {
+        tags: {
+            "candlelight:cheese": `${loaderid}:food/cheese`,
+
+            "candlelight:pasta": `${loaderid}:food/pastas`,
+        },
         items: {
+            "farmersdelight:raw_pasta": `${loaderid}:food/raw_pasta`,
+
             "minecraft:chicken": `${loaderid}:foods/raw_chicken`,
             "minecraft:porkchop": `${loaderid}:foods/raw_pork`,
             "minecraft:mutton": `${loaderid}:foods/raw_mutton`,
@@ -25,6 +32,10 @@ const ingredient_tags_replacement = (loaderid) => {
             "croptopia:blackberry": `${loaderid}:fruits/blackberries`,
             "croptopia:raspberry": `${loaderid}:fruits/raspberries`,
 
+            "expandeddelight:cheese_slice": `${loaderid}:food/cheese`,
+            "croptopia:cheese": `${loaderid}:food/cheese`,
+            "casualness_delight:cheese_wheel_slice": `${loaderid}:food/cheese`,
+
             "minecraft:sugar": `${loaderid}:sugar`,
             "minecraft:water_bucket": `${loaderid}:water_buckets`,
 
@@ -39,7 +50,7 @@ const ingredient_tags_replacement = (loaderid) => {
 const custom_tags = {
     items: {
         "cheeses.json": [
-            "#$loader$:cheese"
+            "#$loader$:food/cheese",
         ],
         tools: {
             knives: []
@@ -54,10 +65,28 @@ const custom_tags = {
                 "meadow:piece_of_grain_cheese",
                 "meadow:piece_of_amethyst_cheese",
                 "meadow:piece_of_buffalo_cheese",
-                "meadow:piece_of_goat_cheese"
+                "meadow:piece_of_goat_cheese",
+                "expandeddelight:cheese_slice",
+                "croptopia:cheese",
+                "casualness_delight:cheese_wheel_slice",
             ]
         },
         foods: {
+            pastas: [
+                "#candlelight:pasta",
+                "farmersdelight:raw_pasta",
+                "#$loader$:pasta"
+            ],
+            cheese: [
+                "casualness_delight:cheese_wheel_slice",
+                "#candlelight:cheese",
+                "#meadow:cheese",
+                "croptopia:cheese",
+                "#$loader$:cheese",
+                "#$loader$:cheeses",
+                "#$loader$:cheeses/nether",
+                "#$loader$:cheeses/normal"
+            ],
             cooked_meats: {
                 cooked_eggs: [
                     "#$loader$:cooked_eggs"
