@@ -44,13 +44,24 @@ const ingredient_tags_replacement = (loaderid) => {
             "minecraft:egg": `${loaderid}:eggs`,
             "meadow:alpine_salt": `${loaderid}:salt`,
             "croptopia:salt": `${loaderid}:salt`,
-            "vegandelight:salt": `${loaderid}:salt`,
+
+            "minecraft:bone": `${loaderid}:bones`,
+            "aquaculture:fish_bones": `${loaderid}:bones/fish`
         }
     }
 };
 
 const custom_tags = {
     items: {
+        "bones.json": [
+            "minecraft:bones",
+            "#$loader$:bones/fish"
+        ],
+        bones: {
+            fish: [
+                "aquaculture:fish_bones",
+            ],
+        },
         "cheeses.json": [
             "#$loader$:food/cheese",
         ],
