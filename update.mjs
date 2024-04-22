@@ -42,11 +42,20 @@ const MODRINTH_MODS = [
     { id: "croptopiadelight", slug: "croptopia-delight", loaders: ["forge"]},
     { id: "sunflowerdelight", slug: "sunflower-delight", loaders: ["forge"]},
     { id: "nethersdelight", slug: "nethers-delight-refabricated", loaders: ["fabric", "quilt"]},
+    
+    { id: "create", slug: "create", loaders: ["forge", "neoforge"]},
+    { id: "create", slug: "create-fabric", loaders: ["fabric", "quilt"]},
+    { id: "createfood", slug: "create-food", loaders: ["fabric"]},
     //{ id: "", slug: "", loaders: []},
 ]
 
+let cache;
+if(fs.existsSync('./.update_cache.json')) cache = JSON.parse(fs.readFileSync('./.update_cache.json', 'utf8'));
+else cache = {};
+
 for(const mod of MODRINTH_MODS){
     const metadata = {}
+    if(!cache[mod.slug]) cache[mod.slug] = {};
     for(const loader of mod.loaders){
         if(fs.existsSync(path.resolve(`./mods/${loader}/${mod.id}.jar`))){
             const modFiles = readZipArchive(path.resolve(`./mods/${loader}/${mod.id}.jar`));
@@ -56,22 +65,25 @@ for(const mod of MODRINTH_MODS){
             metadata[loader] = undefined
         }
     }
-    console.log(`\n${mod.id}:`)
+    console.log(`\n${mod.id} (${mod.slug}):`)
     const versions = await getLatestVersions({ project: mod.slug });
     for(const loader of Object.keys(versions)){
         if(!versions[loader] || versions[loader].version_number == metadata[loader]) continue;
         //console.log(`Old version: ${metadata[loader]} - New version: ${versions[loader].version_number} (${loader})`)
         if(!metadata[loader] || !(semver.valid(metadata[loader])) || !(semver.valid(versions[loader].version_number)) || semver.gt(semver.valid(versions[loader].version_number), semver.valid(metadata[loader]))){
+            if(cache[mod.slug][loader] && versions[loader].version_number == cache[mod.slug][loader]) continue;
             console.log(`Update available for ${loader}: ${metadata[loader]} -> ${versions[loader].version_number} (${versions[loader].id})`)
             await downloadToFolder({
                 url: getModrinthPrimaryFile(versions[loader].files).url,
                 loader: loader,
                 id: mod.id
             })
+            cache[mod.slug][loader] = versions[loader].version_number;
             console.log(`Update for ${mod.id}(${loader}) downloaded !`)
         }
     }
 }
+fs.writeFileSync('./.update_cache.json', JSON.stringify(cache));
 
 async function downloadToFolder({url, loader, id}){
     const filePath = path.resolve(`./mods/${loader}/${id}.jar`)
