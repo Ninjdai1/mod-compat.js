@@ -25,6 +25,32 @@ const containers = {
     ]
 }
 
+const FLUID_BUCKET_QTY = {
+    forge: 250,
+    c: 27000
+}
+
+const liquid_containers = (loader_id) => {
+    return {
+        items: {
+            "minecraft:milk_bucket": {
+                amount: FLUID_BUCKET_QTY[loader_id],
+                fluidTag: `${loader_id}:milk`
+            },
+            "minecraft:water_bucket": {
+                amount: FLUID_BUCKET_QTY[loader_id],
+                fluidTag: `${loader_id}:water`
+            }
+        },
+        tags: {
+            "c:water_buckets": {
+                amount: FLUID_BUCKET_QTY[loader_id],
+                fluidTag: `${loader_id}:water`
+            }
+        }
+    }
+}
+
 const itemList = {
     vinery: {
         wines: [
@@ -82,4 +108,4 @@ const itemList = {
 }
 
 
-export { itemList, containers };
+export { itemList, containers, liquid_containers };

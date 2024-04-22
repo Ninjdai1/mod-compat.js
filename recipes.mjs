@@ -1,6 +1,6 @@
 import fs from "fs";
 import { vinery_bushes, cuttables, botanypots } from "./data/custom_recipes.mjs";
-import { containers } from "./data/custom_data.mjs";
+import { containers, liquid_containers } from "./data/custom_data.mjs";
 import { ingredientToTag } from "./tags.mjs";
 
 function generateRecipes(modsData, loader){
@@ -88,6 +88,20 @@ function generateRecipes(modsData, loader){
                                 loader:loader, 
                                 index:index,
                                 recipe: convertBakeryBowlToCreateMixer(recipe, mod),
+                                mods: [mod, itemMod, "create"],
+                            }),
+                            modName: mod,
+                            targetMod: "create",
+                            targetType: "mixing",
+                            item: item
+                        })
+                        writeRecipe({
+                            loader:loader, 
+                            index:`${index}_liquids`,
+                            recipe: withDependencies({
+                                loader:loader, 
+                                index:index,
+                                recipe: convertBakeryBowlToCreateMixer_Liquids(recipe, mod, loader),
                                 mods: [mod, itemMod, "create"],
                             }),
                             modName: mod,
@@ -212,6 +226,7 @@ function getIdFromRecipe(recipe){
 }
 
 function withDependencies({loader, recipe, mods=["minecraft"]}) {
+    if(!recipe) return;
     const uniq = [...new Set(mods)];
     if(loader=="fabric"){
         recipe["fabric:load_conditions"] = [
@@ -237,12 +252,13 @@ function withDependencies({loader, recipe, mods=["minecraft"]}) {
 }
 
 function writeRecipe({recipe, index, loader, modName, targetMod, targetType, item}) {
+    if(!recipe) return;
     const dir = `./output/${loader}/${modName}/recipes/${targetMod}/${targetType}`;
     
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir, { recursive: true });
     }
-    fs.writeFile(`./output/${loader}/${modName}/recipes/${targetMod}/${targetType}/${item}${(!index || index==0) ?"":`_${index}`}.json`, JSON.stringify(recipe, undefined, 4), (err) => {
+    fs.writeFile(`./output/${loader}/${modName}/recipes/${targetMod}/${targetType}/${item}${(!index || index==0) ?"":`_${String(index).replace("0_", "")}`}.json`, JSON.stringify(recipe, undefined, 4), (err) => {
         if (err)
             console.log(err);
     });
@@ -328,6 +344,29 @@ function convertBakeryBowlToCreateMixer(recipe, mod) {
     };
     createRecipe.ingredients.push(...recipe.ingredients);
     return createRecipe;
+}
+
+function convertBakeryBowlToCreateMixer_Liquids(recipe, mod, loader) {
+    const loader_id = loader == "forge" ? "forge" : "c";
+    const createRecipe = {
+        type: "create:mixing",
+        results: [recipe.result],
+        ingredients : [],
+    };
+    let changed = false;
+    createRecipe.ingredients.push(...recipe.ingredients.map((ingredient) => {
+        const liquidcontainer = liquid_containers(loader_id);
+        if(ingredient.item && (liquidcontainer.items[ingredient.item])) {
+            changed = true;
+            return liquidcontainer.items[ingredient.item];
+        } else if(ingredient.tag && (liquidcontainer.tags[ingredient.tag])) {
+            changed = true;
+            return liquidcontainer.tags[ingredient.tag];
+        } else {
+            return ingredientToTag(ingredient, loader);
+        }
+    }));
+    return changed ? createRecipe : null;
 }
 
 function convertFarmAndCharmBowlToCreateMixer(recipe, mod) {
