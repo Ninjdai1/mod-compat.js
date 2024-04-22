@@ -130,7 +130,7 @@ const custom_tags = {
             blueberries: ["croptopia:blueberry"],
             blackberries: ["croptopia:blackberry"],
             raspberries: ["croptopia:raspberry"],
-            pineapple: ["pineapple_delight:pineapple_side"],
+            pineapple: ["#$loader$:pineapple", "pineapple_delight:pineapple_side", "croptopia:pineapple"],
             sweet: ["#$loader$:fruits/strawberries", "#$loader$:fruits/blueberries", "#$loader$:fruits/blackberries", "#$loader$:fruits/raspberries", "#$loader$:fruits/pineapple"],
         },
         eggs: ["minecraft:egg", "duckling:duck_egg"],
@@ -161,7 +161,8 @@ const custom_tags = {
         ],
         milks: [
             "#meadow:milk"
-        ]
+        ],
+        pineapples: ["#$loader$:fruits/pineapple"]
     }
 }
 
