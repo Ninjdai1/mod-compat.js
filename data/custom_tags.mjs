@@ -7,13 +7,34 @@ const ingredient_tags_replacement = (loaderid) => {
 
             "candlelight:pasta": `${loaderid}:food/pastas`,
 
+            "farm_and_charm:bread": `${loaderid}:bread`,
+
             "candlelight:crops/tomato": `${loaderid}:crops/tomato`,
+            "farm_and_charm:tomato": `${loaderid}:crops/tomato`,
             "$loader$:cabbage": `${loaderid}:crops/cabbage`,
+            "farm_and_charm:onion": `${loaderid}:crops/onion`,
             
+            "farm_and_charm:barley": `${loaderid}:grain/barley`,
+            "farm_and_charm:corn": `${loaderid}:grain/corn`,
             "$loader$:rice": `${loaderid}:grain/rice`,
+            "farm_and_charm:wheat": `${loaderid}:grain/wheat`,
+
+            "farm_and_charm:cooked_beef": `${loaderid}:cooked_beef`,
+
+            "farm_and_charm:water_bottles": `${loaderid}:water_bottles`,
+            "meadow:water_bottles": `${loaderid}:water_bottles`,
         },
         items: {
             "farmersdelight:raw_pasta": `${loaderid}:food/raw_pasta`,
+
+            "minecraft:bread": `${loaderid}:bread`,
+            
+            "farm_and_charm:flour": `${loaderid}:flour`,
+
+            "farm_and_charm:butter": `${loaderid}:butter`,
+            "candlelight:butter": `${loaderid}:butter`,
+            "youkaishomecoming:butter": `${loaderid}:butter`,
+            "croptopia:butter": `${loaderid}:butter`,
 
             "minecraft:chicken": `${loaderid}:foods/raw_chicken`,
             "minecraft:porkchop": `${loaderid}:foods/raw_pork`,
@@ -33,11 +54,13 @@ const ingredient_tags_replacement = (loaderid) => {
             "culturaldelights:regular_eggplants": `${loaderid}:crops/eggplant`,
             "croptopia:eggplant": `${loaderid}:crops/eggplant`,
             "croptopia:lettuce": `${loaderid}:crops/lettuce`,
-            "candlelight:lettuce": `${loaderid}:crops/lettuce`,
+            "candlelight:lettuce": `${loaderid}:crops/lettuce`, 
 
             "farmersdelight:rice": `${loaderid}:grain/rice`,
+            "farm_and_charm:oat": `${loaderid}:grain/oat`,
 
             "bakery:strawberry": `${loaderid}:fruits/strawberries`,
+            "farm_and_charm:strawberry": `${loaderid}:fruits/strawberries`,
             "croptopia:strawberry": `${loaderid}:fruits/strawberries`,
             "croptopia:blueberry": `${loaderid}:fruits/blueberries`,
             "croptopia:blackberry": `${loaderid}:fruits/blackberries`,
@@ -138,33 +161,41 @@ const custom_tags = {
             cabbage: ["croptopia:cabbage"],
             eggplant: ["culturaldelights:regular_eggplants", "croptopia:eggplant"],
             lettuce: ["candlelight:lettuce", "croptopia:lettuce"],
-            tomato: ["#candlelight:crops/tomato", "farmersdelight:tomato"],
+            onion: ["farm_and_charm:onion", "croptopia:onion"],
+            tomato: ["#candlelight:crops/tomato", "farm_and_charm:tomato","farm_and_charm:tomato", "farmersdelight:tomato", "croptopia:tomato"],
         },
         grain: {
+            barley: ["#farm_and_charm:barley"],
+            corn: ["#farm_and_charm:corn"],
+            oat: ["farm_and_charm:oat", "croptopia:oat"],
             rice: ["farmersdelight:rice", "croptopia:rice"],
+            wheat: ["minecraft:wheat", "#farm_and_charm:wheat"],
         },
         fruits: {
-            strawberries: ["bakery:strawberry", "croptopia:strawberry"],
+            strawberries: ["bakery:strawberry", "croptopia:strawberry", "farm_and_charm:strawberry"],
             blueberries: ["croptopia:blueberry"],
             blackberries: ["croptopia:blackberry"],
             raspberries: ["croptopia:raspberry"],
             pineapple: ["pineapple_delight:pineapple_side", "croptopia:pineapple"],
             sweet: ["#$loader$:fruits/strawberries", "#$loader$:fruits/blueberries", "#$loader$:fruits/blackberries", "#$loader$:fruits/raspberries", "#$loader$:fruits/pineapple"],
         },
-        grains: ["#$loader$:grain/rice"],
+        grains: ["#$loader$:grain/barley", "#$loader$:grain/corn", "#$loader$:grain/rice", "#$loader$:grain/wheat"],
+        cooked_beef: ["#farm_and_charm:cooked_beef"],
+        bread: ["#farm_and_charm:bread", "minecraft:bread"],
         eggs: ["minecraft:egg", "duckling:duck_egg"],
         sugar: [
             "minecraft:sugar"
         ],
-        water_buckets: [
-            "minecraft:water_bucket"
-        ],
+        water_buckets: ["minecraft:water_bucket"],
+        water_bottles: ["farm_and_charm:water_bottles", "meadow:water_bottles", "minecraft:water_bottle"],
         salt: [
             "meadow:alpine_salt",
             "croptopia:salt",
             "vegandelight:salt",
         ],
         milks: ["#meadow:milk"],
+        flour: ["farm_and_charm:flour"],
+        butter: ["farm_and_charm:butter", "candlelight:butter", "youkaishomecoming:butter", "croptopia:butter"]
     }
 }
 
@@ -173,8 +204,8 @@ const VANILLA_CROPS = ["beetroot", "carrot", "potato"]
 
 const MODDED_CROPS = {
     crops: ["coconut"],
-    vegetables: ["cabbage", "cucumber", "eggplant", "garlic", "lettuce", "tomato"],
-    grain: ["rice"],
+    vegetables: ["cabbage", "cucumber", "eggplant", "garlic", "lettuce", "onion", "tomato"],
+    grain: ["barley", "corn", "oat", "rice", "wheat"],
     fruits: ["blueberries", "blackberries", "pineapple", "raspberries", "strawberries"]
 }
 

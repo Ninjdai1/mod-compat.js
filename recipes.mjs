@@ -96,6 +96,7 @@ function generateRecipes(modsData, loader){
                         });
                         break;
                     case "bakery:crafting_bowl":
+                    case "farm_and_charm:crafting_bowl":
                         writeRecipe({
                             loader:loader, 
                             index:index,
@@ -117,22 +118,6 @@ function generateRecipes(modsData, loader){
                                 loader:loader, 
                                 index:index,
                                 recipe: convertBakeryBowlToCreateMixer_Liquids(recipe, mod, loader),
-                                mods: [mod, itemMod, "create"],
-                            }),
-                            modName: mod,
-                            targetMod: "create",
-                            targetType: "mixing",
-                            item: item
-                        })
-                        break;
-                    case "farm_and_charm:crafting_bowl":
-                        writeRecipe({
-                            loader:loader, 
-                            index:index,
-                            recipe: withDependencies({
-                                loader:loader, 
-                                index:index,
-                                recipe: convertFarmAndCharmBowlToCreateMixer(recipe, mod),
                                 mods: [mod, itemMod, "create"],
                             }),
                             modName: mod,
@@ -405,16 +390,6 @@ function convertBakeryBowlToCreateMixer_Liquids(recipe, mod, loader) {
         }
     }));
     return changed ? createRecipe : null;
-}
-
-function convertFarmAndCharmBowlToCreateMixer(recipe, mod) {
-    const createRecipe = {
-        type: "create:mixing",
-        results: [recipe.result],
-        ingredients : [],
-    };
-    createRecipe.ingredients.push(...recipe.ingredients);
-    return createRecipe;
 }
 
 /*function convertBakeryStationToCreateDeployer(recipe, mod) {
