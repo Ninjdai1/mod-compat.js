@@ -131,32 +131,28 @@ const custom_tags = {
             raw_cod: ["minecraft:cod"],
             raw_salmon: ["minecraft:salmon"],
         },
+        crops: {
+            garlic: ["croptopia:garlic"],
+        },
+        vegetables: {
+            cabbage: ["croptopia:cabbage"],
+            eggplant: ["culturaldelights:regular_eggplants", "croptopia:eggplant"],
+            lettuce: ["candlelight:lettuce", "croptopia:lettuce"],
+            tomato: ["#candlelight:crops/tomato", "farmersdelight:tomato"],
+        },
+        grain: {
+            rice: ["farmersdelight:rice", "croptopia:rice"],
+        },
         fruits: {
             strawberries: ["bakery:strawberry", "croptopia:strawberry"],
             blueberries: ["croptopia:blueberry"],
             blackberries: ["croptopia:blackberry"],
             raspberries: ["croptopia:raspberry"],
-            pineapple: ["#$loader$:pineapple", "pineapple_delight:pineapple_side", "croptopia:pineapple"],
+            pineapple: ["pineapple_delight:pineapple_side", "croptopia:pineapple"],
             sweet: ["#$loader$:fruits/strawberries", "#$loader$:fruits/blueberries", "#$loader$:fruits/blackberries", "#$loader$:fruits/raspberries", "#$loader$:fruits/pineapple"],
         },
+        grains: ["#$loader$:grain/rice"],
         eggs: ["minecraft:egg", "duckling:duck_egg"],
-        grain: {
-            rice: [
-                "farmersdelight:rice",
-                "#$loader$:crops/rice"
-            ]
-        },
-        crops: {
-            garlic: ["croptopia:garlic"],
-            rice: ["#$loader$:grain/rice", "#$loader$:rice"],
-            tomato: ["#candlelight:crops/tomato", "farmersdelight:tomato"],
-            cabbage: ["#$loader$:cabbage", "croptopia:cabbage"],
-            eggplant: ["#$loader$:eggplant", "culturaldelights:regular_eggplants", "croptopia:eggplant"],
-            lettuce: ["#$loader$:lettuce", "candlelight:lettuce", "croptopia:lettuce"]
-        },
-        vegetables: {
-            garlic: ["croptopia:garlic"]
-        },
         sugar: [
             "minecraft:sugar"
         ],
@@ -168,18 +164,19 @@ const custom_tags = {
             "croptopia:salt",
             "vegandelight:salt",
         ],
-        milks: [
-            "#meadow:milk"
-        ],
-        pineapple: ["#$loader$:fruits/pineapple"],
-        cabbage: ["#$loader$:crops/cabbage"],
-        eggplant: ["#$loader$:crops/eggplant"],
-        lettuce: ["#$loader$:crops/lettuce"]
+        milks: ["#meadow:milk"],
     }
 }
 
 const RAW_MEATS = ["raw_fishes", "raw_chicken", "raw_pork", "raw_beef", "raw_mutton", "raw_rabbit"]
 const VANILLA_CROPS = ["beetroot", "carrot", "potato"]
+
+const MODDED_CROPS = {
+    crops: ["garlic"],
+    vegetables: ["tomato", "cabbage", "eggplant", "lettuce"],
+    grain: ["rice"],
+    fruits: ["strawberries", "blueberries", "blackberries", "raspberries", "pineapple"]
+}
 
 for(const meat of RAW_MEATS){
     const loader_string = `#$loader$:${meat}`
@@ -193,6 +190,27 @@ for(const crop of VANILLA_CROPS){
 
     const vegetables = [`minecraft:${crop}`, loader_string, `#$loader$:crops/${crop}`];
     custom_tags.items.vegetables[crop] ? custom_tags.items.vegetables[crop].push(...vegetables) : custom_tags.items.vegetables[crop] = vegetables;
+}
+for(const category in MODDED_CROPS){
+    if(!custom_tags.items[category]) custom_tags.items[category] = {};
+    for(const crop of MODDED_CROPS[category]){
+        if(custom_tags.items[category][crop]){
+            custom_tags.items[category][crop] = [...new Set([...custom_tags.items[category][crop], `#$loader$:crops/${crop}`, `#$loader$:${crop}`])];
+        } else {
+            custom_tags.items[category][crop] = [...new Set([`#$loader$:crops/${crop}`, `#$loader$:${crop}`])];
+        }
+        if(custom_tags.items[crop]){
+            custom_tags.items[crop] = [...new Set([...custom_tags.items[crop], `#$loader$:crops/${crop}`, `#$loader$:${category}/${crop}`])];
+        } else {
+            custom_tags.items[crop] = [...new Set([`#$loader$:crops/${crop}`, `#$loader$:${category}/${crop}`])];
+        }
+        if(category=="crops") continue;
+        if(custom_tags.items.crops[crop]){
+            custom_tags.items.crops[crop] = [...new Set([...custom_tags.items.crops[crop], `#$loader$:${crop}`, `#$loader$:${category}/${crop}`])];
+        } else {
+            custom_tags.items.crops[crop] = [...new Set([`#$loader$:${crop}`, `#$loader$:${category}/${crop}`])];
+        }
+    }
 }
 
 const hydration = {
