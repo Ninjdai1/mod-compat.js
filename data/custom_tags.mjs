@@ -132,6 +132,9 @@ const custom_tags = {
         crops: {
             garlic: ["croptopia:garlic"]
         },
+        vegetables: {
+            garlic: ["croptopia:garlic"]
+        },
         sugar: [
             "minecraft:sugar"
         ],
@@ -154,8 +157,13 @@ for(const meat of RAW_MEATS){
     custom_tags.items.foods[meat] ? (Array.isArray(custom_tags.items.foods[meat]) ? custom_tags.items.foods[meat].push(loader_string) : custom_tags.items.foods[`${meat}.json`].push(loader_string)) : custom_tags.items.foods[meat] = [loader_string]
 }
 for(const crop of VANILLA_CROPS){
-    const loader_string = `#$loader$:${crop}`
-    custom_tags.items.crops[crop] ? custom_tags.items.crops[crop].push(loader_string) : custom_tags.items.foods[crop] = [`minecraft:${crop}`, loader_string]
+    const loader_string = `#$loader$:${crop}`;
+
+    const crops = [`minecraft:${crop}`, loader_string, `#$loader$:vegetables/${crop}`];
+    custom_tags.items.crops[crop] ? custom_tags.items.crops[crop].push(...crops) : custom_tags.items.crops[crop] = crops
+
+    const vegetables = [`minecraft:${crop}`, loader_string, `#$loader$:crops/${crop}`];
+    custom_tags.items.vegetables[crop] ? custom_tags.items.vegetables[crop].push(...vegetables) : custom_tags.items.vegetables[crop] = vegetables;
 }
 
 const hydration = {
