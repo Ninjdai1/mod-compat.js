@@ -32,6 +32,8 @@ const ingredient_tags_replacement = (loaderid) => {
             "croptopia:blackberry": `${loaderid}:fruits/blackberries`,
             "croptopia:raspberry": `${loaderid}:fruits/raspberries`,
 
+            "pineapple_delight:pineapple_side": `${loaderid}:fruits/pineapple`,
+
             "expandeddelight:cheese_slice": `${loaderid}:food/cheese`,
             "croptopia:cheese": `${loaderid}:food/cheese`,
             "casualness_delight:cheese_wheel_slice": `${loaderid}:food/cheese`,
@@ -112,7 +114,8 @@ const custom_tags = {
             blueberries: ["croptopia:blueberry"],
             blackberries: ["croptopia:blackberry"],
             raspberries: ["croptopia:raspberry"],
-            sweet: ["#$loader$:fruits/strawberries", "#$loader$:fruits/blueberries", "#$loader$:fruits/blackberries", "#$loader$:fruits/raspberries"],
+            pineapple: ["pineapple_delight:pineapple_side"],
+            sweet: ["#$loader$:fruits/strawberries", "#$loader$:fruits/blueberries", "#$loader$:fruits/blackberries", "#$loader$:fruits/raspberries", "#$loader$:fruits/pineapple"],
         },
         eggs: ["minecraft:egg", "duckling:duck_egg"],
         crops: {
