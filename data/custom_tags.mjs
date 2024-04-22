@@ -30,6 +30,7 @@ const ingredient_tags_replacement = (loaderid) => {
             "minecraft:potato": `${loaderid}:crops/potato`,
             "croptopia:garlic": `${loaderid}:crops/garlic`,
             "farmersdelight:tomato": `${loaderid}:crops/tomato`,
+            "culturaldelights:regular_eggplants": `${loaderid}:crops/eggplant`,
 
             "farmersdelight:rice": `${loaderid}:grain/rice`,
 
@@ -146,7 +147,8 @@ const custom_tags = {
             garlic: ["croptopia:garlic"],
             rice: ["#$loader$:grain/rice", "#$loader$:rice"],
             tomato: ["#candlelight:crops/tomato", "farmersdelight:tomato"],
-            cabbage: ["#$loader$:cabbage"]
+            cabbage: ["#$loader$:cabbage", "croptopia:cabbage"],
+            eggplant: ["#$loader$:eggplant", "culturaldelights:regular_eggplants", "croptopia:eggplant"]
         },
         vegetables: {
             garlic: ["croptopia:garlic"]
@@ -166,7 +168,8 @@ const custom_tags = {
             "#meadow:milk"
         ],
         pineapple: ["#$loader$:fruits/pineapple"],
-        cabbage: ["$loader$:crops/cabbage"]
+        cabbage: ["#$loader$:crops/cabbage"],
+        eggplant: ["#$loader$:crops/eggplant"],
     }
 }
 
