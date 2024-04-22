@@ -2,6 +2,7 @@ import fs from "fs";
 import { vinery_bushes, cuttables, botanypots } from "./data/custom_recipes.mjs";
 import { containers, liquid_containers } from "./data/custom_data.mjs";
 import { ingredientToTag } from "./tags.mjs";
+import { getLoaderId } from "./helpers.mjs";
 
 function generateRecipes(modsData, loader){
     console.log(loader);
@@ -78,7 +79,21 @@ function generateRecipes(modsData, loader){
                             targetMod: "create",
                             targetType: "mixing",
                             item: item
-                        })
+                        });
+                        writeRecipe({
+                            loader:loader, 
+                            index:`${index}_liquids`,
+                            recipe: withDependencies({
+                                loader:loader, 
+                                index:index,
+                                recipe: convertVineryFermentationToCreateMixing_Liquids(recipe, mod, loader),
+                                mods: [mod, itemMod, "create"],
+                            }),
+                            modName: mod,
+                            targetMod: "create",
+                            targetType: "mixing",
+                            item: item
+                        });
                         break;
                     case "bakery:crafting_bowl":
                         writeRecipe({
@@ -336,6 +351,29 @@ function convertVineryFermentationToCreateMixing(recipe, mod){
     return createRecipe;
 }
 
+function convertVineryFermentationToCreateMixing_Liquids(recipe, mod, loader){
+    const loader_id = getLoaderId(loader);
+    const createRecipe = {
+        type: "create:mixing",
+        results: [recipe.result],
+        ingredients: [],
+    };
+    let changed = false;
+    createRecipe.ingredients.push(...recipe.ingredients.map((ingredient) => {
+        const liquidcontainer = liquid_containers(loader_id);
+        if(ingredient.item && (liquidcontainer.items[ingredient.item])) {
+            changed = true;
+            return liquidcontainer.items[ingredient.item];
+        } else if(ingredient.tag && (liquidcontainer.tags[ingredient.tag])) {
+            changed = true;
+            return liquidcontainer.tags[ingredient.tag];
+        } else {
+            return ingredientToTag(ingredient, loader);
+        }
+    }));
+    return changed ? createRecipe : null;
+}
+
 function convertBakeryBowlToCreateMixer(recipe, mod) {
     const createRecipe = {
         type: "create:mixing",
@@ -347,7 +385,7 @@ function convertBakeryBowlToCreateMixer(recipe, mod) {
 }
 
 function convertBakeryBowlToCreateMixer_Liquids(recipe, mod, loader) {
-    const loader_id = loader == "forge" ? "forge" : "c";
+    const loader_id = getLoaderId(loader);
     const createRecipe = {
         type: "create:mixing",
         results: [recipe.result],

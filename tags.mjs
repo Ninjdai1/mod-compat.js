@@ -1,6 +1,7 @@
 import { hydration, ingredient_tags_replacement, custom_tags } from "./data/custom_tags.mjs";
 import fs from "fs";
 import path from "path";
+import { getLoaderId } from "./helpers.mjs";
 
 function generateTagData(loader){
     switch(loader){
@@ -42,7 +43,7 @@ function ingredientToTag(ingredient, loader){
     }
 }
 
-function iterate(obj, loader, path=`./output/${loader}/${loader=="forge" ? "forge" : "c"}/tags`, output=[]) {
+function iterate(obj, loader, path=`./output/${loader}/${getLoaderId(loader)}/tags`, output=[]) {
     for (var property in obj) {
         if (obj.hasOwnProperty(property)) {
             if (typeof obj[property] == "object" && !Array.isArray(obj[property])) {
@@ -50,10 +51,10 @@ function iterate(obj, loader, path=`./output/${loader}/${loader=="forge" ? "forg
             } else {
                 output.push({
                     dir: `${path}/`,
-                    name: property.replaceAll("$loader$", loader=="forge" ? "forge" : "c").replaceAll(".json", "")+".json",
+                    name: property.replaceAll("$loader$", getLoaderId(loader)).replaceAll(".json", "")+".json",
                     values: obj[property].map(e => { 
                         return {
-                            id: e.replaceAll("$loader$", loader=="forge" ? "forge" : "c"),
+                            id: e.replaceAll("$loader$", getLoaderId(loader)),
                             required: false,
                         }
                     })

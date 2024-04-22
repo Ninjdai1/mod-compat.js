@@ -38,4 +38,6 @@ function mergeModsData(modData){
     return data;
 }
 
-export { loadData, mergeModsData }
+const getLoaderId = (loader) => loader == "forge" ? "forge" : "c";
+
+export { loadData, mergeModsData, getLoaderId }

@@ -40,7 +40,11 @@ const liquid_containers = (loader_id) => {
             "minecraft:water_bucket": {
                 amount: FLUID_BUCKET_QTY[loader_id],
                 fluidTag: `${loader_id}:water`
-            }
+            },
+            "minecraft:lava_bucket": {
+                amount: FLUID_BUCKET_QTY[loader_id],
+                fluid: `minecraft:lava`
+            },
         },
         tags: {
             "c:water_buckets": {
