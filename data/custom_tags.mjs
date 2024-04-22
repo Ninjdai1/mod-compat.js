@@ -6,6 +6,9 @@ const ingredient_tags_replacement = (loaderid) => {
             "candlelight:cheese": `${loaderid}:food/cheese`,
 
             "candlelight:pasta": `${loaderid}:food/pastas`,
+
+            "#candlelight:crops/tomato": `${loaderid}:crops/tomato`,
+            "$launcher$:rice": `${loaderid}:grain/rice`,
         },
         items: {
             "farmersdelight:raw_pasta": `${loaderid}:food/raw_pasta`,
@@ -23,8 +26,10 @@ const ingredient_tags_replacement = (loaderid) => {
             "minecraft:beetroot": `${loaderid}:crops/beetroot`,
             "minecraft:carrot": `${loaderid}:crops/carrot`,
             "minecraft:potato": `${loaderid}:crops/potato`,
-
             "croptopia:garlic": `${loaderid}:crops/garlic`,
+            "farmersdelight:tomato": `${loaderid}:crops/tomato`,
+
+            "farmersdelight:rice": `${loaderid}:grain/rice`,
 
             "bakery:strawberry": `${loaderid}:fruits/strawberries`,
             "croptopia:strawberry": `${loaderid}:fruits/strawberries`,
@@ -129,8 +134,16 @@ const custom_tags = {
             sweet: ["#$loader$:fruits/strawberries", "#$loader$:fruits/blueberries", "#$loader$:fruits/blackberries", "#$loader$:fruits/raspberries", "#$loader$:fruits/pineapple"],
         },
         eggs: ["minecraft:egg", "duckling:duck_egg"],
+        grain: {
+            rice: [
+                "farmersdelight:rice",
+                "#$loader$:crops/rice"
+            ]
+        },
         crops: {
-            garlic: ["croptopia:garlic"]
+            garlic: ["croptopia:garlic"],
+            rice: ["#$loader$:grain/rice", "#$loader$:rice"],
+            tomato: ["#candlelight:crops/tomato", "farmersdelight:tomato"]
         },
         vegetables: {
             garlic: ["croptopia:garlic"]
