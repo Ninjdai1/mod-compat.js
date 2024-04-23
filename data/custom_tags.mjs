@@ -58,6 +58,7 @@ const ingredient_tags_replacement = (loaderid) => {
 
             "farmersdelight:rice": `${loaderid}:grain/rice`,
             "farm_and_charm:oat": `${loaderid}:grain/oat`,
+            "vintagedelight:raw_oats": `${loaderid}:grain/oat`,
 
             "bakery:strawberry": `${loaderid}:fruits/strawberries`,
             "farm_and_charm:strawberry": `${loaderid}:fruits/strawberries`,
@@ -171,7 +172,7 @@ const custom_tags = {
         grain: {
             barley: ["#farm_and_charm:barley"],
             corn: ["#farm_and_charm:corn"],
-            oat: ["farm_and_charm:oat", "croptopia:oat"],
+            oat: ["farm_and_charm:oat", "croptopia:oat", "vintagedelight:raw_oats"],
             rice: ["farmersdelight:rice", "croptopia:rice"],
             wheat: ["minecraft:wheat", "#farm_and_charm:wheat"],
         },
