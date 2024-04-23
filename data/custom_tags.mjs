@@ -154,9 +154,11 @@ const custom_tags = {
             raw_cod: ["minecraft:cod"],
             raw_salmon: ["minecraft:salmon"],
         },
+        "crops.json": [],
         crops: {
             garlic: ["croptopia:garlic"],
         },
+        "vegetables.json": [],
         vegetables: {
             cabbage: ["croptopia:cabbage"],
             eggplant: ["culturaldelights:regular_eggplants", "croptopia:eggplant"],
@@ -164,6 +166,8 @@ const custom_tags = {
             onion: ["farm_and_charm:onion", "croptopia:onion"],
             tomato: ["#candlelight:crops/tomato", "farm_and_charm:tomato","farm_and_charm:tomato", "farmersdelight:tomato", "croptopia:tomato"],
         },
+        grains: ["#$loader$:grain"],
+        "grain.json": [],
         grain: {
             barley: ["#farm_and_charm:barley"],
             corn: ["#farm_and_charm:corn"],
@@ -171,6 +175,7 @@ const custom_tags = {
             rice: ["farmersdelight:rice", "croptopia:rice"],
             wheat: ["minecraft:wheat", "#farm_and_charm:wheat"],
         },
+        "fruits.json": [],
         fruits: {
             strawberries: ["bakery:strawberry", "croptopia:strawberry", "farm_and_charm:strawberry"],
             blueberries: ["croptopia:blueberry"],
@@ -179,7 +184,15 @@ const custom_tags = {
             pineapple: ["pineapple_delight:pineapple_side", "croptopia:pineapple"],
             sweet: ["#$loader$:fruits/strawberries", "#$loader$:fruits/blueberries", "#$loader$:fruits/blackberries", "#$loader$:fruits/raspberries", "#$loader$:fruits/pineapple"],
         },
-        grains: ["#$loader$:grain/barley", "#$loader$:grain/corn", "#$loader$:grain/rice", "#$loader$:grain/wheat"],
+        "berries.json": ["#$loader$:fruits/strawberries", "#$loader$:fruits/blueberries", "#$loader$:fruits/blackberries", "#$loader$:fruits/raspberries"],
+        
+        tea_leaves: {
+            green: ["herbalbrews:green_tea_leaf"],
+            black: [],
+            oolong: [],
+        },
+        "tea_leaves.json": ["#$loader$:tea_leaves/green", "#$loader$:tea_leaves/black", "#$loader$:tea_leaves/oolong"],
+
         cooked_beef: ["#farm_and_charm:cooked_beef"],
         bread: ["#farm_and_charm:bread", "minecraft:bread"],
         eggs: ["minecraft:egg", "duckling:duck_egg"],
@@ -217,10 +230,12 @@ for(const crop of VANILLA_CROPS){
     const loader_string = `#$loader$:${crop}`;
 
     const crops = [`minecraft:${crop}`, loader_string, `#$loader$:vegetables/${crop}`];
-    custom_tags.items.crops[crop] ? custom_tags.items.crops[crop].push(...crops) : custom_tags.items.crops[crop] = crops
+    custom_tags.items.crops[crop] ? custom_tags.items.crops[crop].push(...crops) : custom_tags.items.crops[crop] = crops;
+    custom_tags.items["vegetables.json"].push(`#$loader$:vegetables/${crop}`);
 
     const vegetables = [`minecraft:${crop}`, loader_string, `#$loader$:crops/${crop}`];
     custom_tags.items.vegetables[crop] ? custom_tags.items.vegetables[crop].push(...vegetables) : custom_tags.items.vegetables[crop] = vegetables;
+    custom_tags.items["crops.json"].push(`#$loader$:crops/${crop}`);
 }
 for(const category in MODDED_CROPS){
     if(!custom_tags.items[category]) custom_tags.items[category] = {};
@@ -230,6 +245,8 @@ for(const category in MODDED_CROPS){
         } else {
             custom_tags.items[category][crop] = [...new Set([`#$loader$:crops/${crop}`, `#$loader$:${crop}`])];
         }
+        console.log(category)
+        custom_tags.items[`${category}.json`].push(`#$loader$:${category}/${crop}`);
         if(custom_tags.items[crop]){
             custom_tags.items[crop] = [...new Set([...custom_tags.items[crop], `#$loader$:crops/${crop}`, `#$loader$:${category}/${crop}`])];
         } else {
