@@ -365,7 +365,7 @@ function convertBakeryBowlToCreateMixer(recipe, mod) {
         results: [recipe.result],
         ingredients : [],
     };
-    createRecipe.ingredients.push(...recipe.ingredients);
+    createRecipe.ingredients.push(...recipe.ingredients.map((ingredient)=> ingredientToTag(ingredient)));
     return createRecipe;
 }
 
