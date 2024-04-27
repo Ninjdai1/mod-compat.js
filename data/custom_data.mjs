@@ -20,6 +20,8 @@ const containers = {
         "c:milk",
         "c:milks",
         "c:water_buckets",
+        "c:buckets/water",
+        "c:buckets/milk",
         "meadow:milk",
         "meadow:water_bottles"
     ]
@@ -50,7 +52,15 @@ const liquid_containers = (loader_id) => {
             "c:water_buckets": {
                 amount: FLUID_BUCKET_QTY[loader_id],
                 fluidTag: `${loader_id}:water`
-            }
+            },
+            "c:buckets/water": {
+                amount: FLUID_BUCKET_QTY[loader_id],
+                fluidTag: `${loader_id}:water`
+            },
+            "c:buckets/lava": {
+                amount: FLUID_BUCKET_QTY[loader_id],
+                fluid: `minecraft:lava`
+            },
         }
     }
 }
