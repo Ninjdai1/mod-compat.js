@@ -1,4 +1,4 @@
-import { hydration, ingredient_tags_replacement, custom_tags } from "./data/custom_tags.mjs";
+import { hydration, ingredient_tags_replacement, custom_tags, create_tags } from "./data/custom_tags.mjs";
 import fs from "fs";
 import path from "path";
 import { getLoaderId } from "./helpers.mjs";
@@ -15,6 +15,15 @@ function generateTagData(loader){
             break;
     }
     for(const file of iterate(custom_tags, loader)){
+        if (!fs.existsSync(file.dir)){
+            fs.mkdirSync(path.resolve(file.dir), { recursive: true });
+        }
+        fs.writeFile(`${file.dir}/${file.name}`, JSON.stringify({replace: false, values: file.values}, undefined, 4), (err) => {
+            if (err)
+                console.log(err);
+        });
+    }
+    for(const file of iterate(create_tags, loader, `./output/${loader}/create/tags`)){
         if (!fs.existsSync(file.dir)){
             fs.mkdirSync(path.resolve(file.dir), { recursive: true });
         }

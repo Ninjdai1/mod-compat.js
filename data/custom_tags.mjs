@@ -86,6 +86,22 @@ const ingredient_tags_replacement = (loaderid) => {
     }
 };
 
+const create_tags = { 
+    items: {
+        upright_on_belt: [
+            "vinery:red_grapejuice_wine_bottle",
+            "vinery:white_grapejuice_wine_bottle",
+            "vinery:jungle_red_grapejuice_bottle",
+            "vinery:jungle_white_grapejuice_bottle",
+            "vinery:savanna_red_grapejuice_bottle",
+            "vinery:savanna_white_grapejuice_bottle",
+            "vinery:taiga_red_grapejuice_bottle",
+            "vinery:taiga_white_grapejuice_bottle",
+            "vinery:wine_bottle"
+        ]
+    }
+}
+
 const custom_tags = {
     items: {
         "bones.json": [
@@ -234,7 +250,7 @@ for(const crop of VANILLA_CROPS){
     custom_tags.items.crops[crop] ? custom_tags.items.crops[crop].push(...crops) : custom_tags.items.crops[crop] = crops;
     custom_tags.items["vegetables.json"].push(`#$loader$:vegetables/${crop}`);
 
-    const vegetables = [`minecraft:${crop}`, loader_string, `#$loader$:crops/${crop}`];
+    const vegetables = [`minecraft:${crop}`, loader_string];
     custom_tags.items.vegetables[crop] ? custom_tags.items.vegetables[crop].push(...vegetables) : custom_tags.items.vegetables[crop] = vegetables;
     custom_tags.items["crops.json"].push(`#$loader$:crops/${crop}`);
 }
@@ -242,16 +258,16 @@ for(const category in MODDED_CROPS){
     if(!custom_tags.items[category]) custom_tags.items[category] = {};
     for(const crop of MODDED_CROPS[category]){
         if(custom_tags.items[category][crop]){
-            custom_tags.items[category][crop] = [...new Set([...custom_tags.items[category][crop], `#$loader$:crops/${crop}`, `#$loader$:${crop}`])];
+            custom_tags.items[category][crop] = [...new Set([...custom_tags.items[category][crop], `#$loader$:${crop}`])];
         } else {
-            custom_tags.items[category][crop] = [...new Set([`#$loader$:crops/${crop}`, `#$loader$:${crop}`])];
+            custom_tags.items[category][crop] = [`#$loader$:${crop}`];
         }
         console.log(category)
         custom_tags.items[`${category}.json`].push(`#$loader$:${category}/${crop}`);
         if(custom_tags.items[crop]){
-            custom_tags.items[crop] = [...new Set([...custom_tags.items[crop], `#$loader$:crops/${crop}`, `#$loader$:${category}/${crop}`])];
+            custom_tags.items[crop] = [...new Set([...custom_tags.items[crop], `#$loader$:crops/${crop}`])];
         } else {
-            custom_tags.items[crop] = [...new Set([`#$loader$:crops/${crop}`, `#$loader$:${category}/${crop}`])];
+            custom_tags.items[crop] = [`#$loader$:crops/${crop}`];
         }
         if(category=="crops") continue;
         if(custom_tags.items.crops[crop]){
@@ -344,4 +360,4 @@ const hydration = {
     }
 }
 
-export { hydration, ingredient_tags_replacement, custom_tags }
+export { hydration, ingredient_tags_replacement, custom_tags, create_tags }
