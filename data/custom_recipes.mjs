@@ -67,7 +67,7 @@ const cuttables = {
             output: [{item: "meadow:piece_of_sheep_cheese", count: 4}],
         },
         {
-            input: [{item: "meadow:grain_cheese_block"}],
+            input: [{item: "meadow:warped_cheese_block"}],
             output: [{item: "meadow:piece_of_warped_cheese", count: 4}],
         },
     ]
