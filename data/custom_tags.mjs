@@ -216,8 +216,13 @@ const custom_tags = {
         sugar: [
             "minecraft:sugar"
         ],
+        buckets: {
+            water: ["minecraft:water_bucket", "meadow:wooden_water_bucket"],
+            milk: ["#meadow:milk"],
+            lava: ["minecraft:lava_bucket"],
+        },
         water_buckets: ["minecraft:water_bucket"],
-        water_bottles: ["farm_and_charm:water_bottles", "meadow:water_bottles", "minecraft:water_bottle"],
+        water_bottles: ["#farm_and_charm:water_bottles", "#meadow:water_bottles", "minecraft:water_bottle"],
         salt: [
             "meadow:alpine_salt",
             "croptopia:salt",

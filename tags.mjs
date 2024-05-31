@@ -46,6 +46,12 @@ function generateTagData(loader){
             required: false,
         })
     })
+    containers.tags.forEach(tag => {
+        containers_tag.values.push({
+            id: `#${tag}`,
+            required: false,
+        })
+    })
     for(const mod of letsdo_mods){
         const mod_tags_dir = `./output/${loader}/${mod}/tags/items`;
         if (!fs.existsSync(mod_tags_dir)){
