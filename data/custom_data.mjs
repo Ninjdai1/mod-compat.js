@@ -5,6 +5,8 @@ const containers = {
         "farmersdelight:nether_salad",
         "farmersdelight:tomato_sauce",
         "meadow:wooden_bucket",
+        "bakery:jar",
+        "bakery:tray",
         "minecraft:bowl",
         "minecraft:glass_bottle",
         "minecraft:honey_bottle",

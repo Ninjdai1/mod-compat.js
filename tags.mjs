@@ -2,6 +2,9 @@ import { hydration, ingredient_tags_replacement, custom_tags, create_tags } from
 import fs from "fs";
 import path from "path";
 import { getLoaderId } from "./helpers.mjs";
+import { containers } from "./data/custom_data.mjs";
+
+const letsdo_mods = ["bakery", "beachparty", "bloomingnature", "brewery", "candlelight", "herbalbrews", "farm_and_charm", "meadow", "vinery"];
 
 function generateTagData(loader){
     switch(loader){
@@ -28,6 +31,27 @@ function generateTagData(loader){
             fs.mkdirSync(path.resolve(file.dir), { recursive: true });
         }
         fs.writeFile(`${file.dir}/${file.name}`, JSON.stringify({replace: false, values: file.values}, undefined, 4), (err) => {
+            if (err)
+                console.log(err);
+        });
+    }
+    
+    const containers_tag = {
+        replace: false,
+        values: []
+    }
+    containers.items.forEach(item => {
+        containers_tag.values.push({
+            id: item,
+            required: false,
+        })
+    })
+    for(const mod of letsdo_mods){
+        const mod_tags_dir = `./output/${loader}/${mod}/tags/items`;
+        if (!fs.existsSync(mod_tags_dir)){
+            fs.mkdirSync(path.resolve(mod_tags_dir), { recursive: true });
+        }
+        fs.writeFile(`${mod_tags_dir}/container.json`, JSON.stringify(containers_tag, undefined, 4), (err) => {
             if (err)
                 console.log(err);
         });
