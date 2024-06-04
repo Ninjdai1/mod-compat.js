@@ -24,6 +24,9 @@ const containers = {
         "c:water_buckets",
         "c:buckets/water",
         "c:buckets/milk",
+        "c:milk_buckets",
+        "c:condensed_milk",
+        "c:milk_bottle",
         "meadow:milk",
         "meadow:water_bottles"
     ]
