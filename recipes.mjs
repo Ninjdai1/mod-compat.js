@@ -197,7 +197,7 @@ function generateRecipes(modsData, loader){
         for(const recipe of cuttables[mod]){
             writeRecipe({loader:loader,
                 recipe: withDependencies({loader:loader,
-                    recipe: toFarmersDelightCuttable(recipe),
+                    recipe: toFarmersDelightCuttable(recipe, loader),
                     mods: [mod, "farmersdelight"],
                 }),
                 modName: mod,
@@ -497,13 +497,13 @@ function convertYoukaishomecomingKettleToHerbalbrewsKettle(recipe, mod) {
     return herbalbrewsRecipe;
 }
 
-function toFarmersDelightCuttable(recipe) {
+function toFarmersDelightCuttable(recipe, loader) {
     const FDRecipe = {
         type: "farmersdelight:cutting",
         ingredients: recipe.input,
         result: recipe.output,
         tool: {
-            tag: "letsdo_addon_compat:tools/knives"
+            tag: `${getLoaderId(loader)}:tools/knives`
         }
     }
     return FDRecipe;
