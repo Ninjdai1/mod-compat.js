@@ -117,7 +117,7 @@ const custom_tags = {
             "#$loader$:food/cheese",
         ],
         tools: {
-            knives: []
+            knives: ["bakery:bread_knife"]
         },
         cheeses: {
             nether: [
