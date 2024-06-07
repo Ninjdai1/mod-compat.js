@@ -133,7 +133,7 @@ function writeDehydration(loader){
         for(const value of Object.keys(modData)){
             if(!hydration_values[value]) hydration_values[value] = {replace: false, items: []};
             for(const item of modData[value]){
-                hydration_values[value].items.push({ id: item, required: false });
+                hydration_values[value].items.push(item);
             }
         }
         fs.writeFile(`${dir}/${mod}_items.json`, JSON.stringify(hydration_values, undefined, 4), (err) => {
