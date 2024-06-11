@@ -7,6 +7,7 @@ const containers = {
         "meadow:wooden_bucket",
         "bakery:jar",
         "bakery:tray",
+        "expandeddelight:glass_jar",
         "minecraft:bowl",
         "minecraft:glass_bottle",
         "minecraft:honey_bottle",
