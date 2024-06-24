@@ -264,6 +264,7 @@ function writeRecipe({recipe, index, loader, modName, targetMod, targetType, ite
     });
 }
 
+const isPotCooking = (mod) => !["meadow", "farmersdelight"].includes(mod)
 
 function writeFLDCookingPotRecipeToFLDCookingPot({loader, index, recipe, mod, itemMod, item}){
     for(const LDMOD of ["meadow", "bakery", "candlelight", "farm_and_charm", "farmersdelight"]){
@@ -277,7 +278,7 @@ function writeFLDCookingPotRecipeToFLDCookingPot({loader, index, recipe, mod, it
                 }),
                 modName: mod,
                 targetMod: LDMOD,
-                targetType: `${!["meadow", "farmersdelight"].includes(LDMOD) ? "pot_" : ""}cooking`,
+                targetType: `${isPotCooking(LDMOD) ? "pot_" : ""}cooking`,
                 item: item
             })
             
@@ -288,7 +289,7 @@ const NO_CONTAINER_MODS = ["meadow"];
 
 function convertFLDCookingPotToFLDCookingPot(recipe, mod, loader) {
     const LDRecipe = {
-        type: `${mod}:${mod != "meadow" ? "pot_" : ""}cooking`,
+        type: `${mod}:${isPotCooking(mod) ? "pot_" : ""}cooking`,
         result: recipe.result,
         ingredients : [],
     };
