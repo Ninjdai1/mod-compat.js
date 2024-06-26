@@ -202,6 +202,8 @@ const custom_tags = {
             sweet: ["#$loader$:fruits/strawberries", "#$loader$:fruits/blueberries", "#$loader$:fruits/blackberries", "#$loader$:fruits/raspberries", "#$loader$:fruits/pineapple"],
         },
         "berries.json": ["#$loader$:fruits/strawberries", "#$loader$:fruits/blueberries", "#$loader$:fruits/blackberries", "#$loader$:fruits/raspberries"],
+
+        "salad_ingredients.json": ["#$loader$:vegetables/lettuce"],
         
         tea_leaves: {
             green: ["herbalbrews:green_tea_leaf"],
