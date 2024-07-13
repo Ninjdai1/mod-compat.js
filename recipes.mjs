@@ -299,7 +299,7 @@ function convertFLDCookingPotToFLDCookingPot(recipe, mod, loader) {
         if(!LDRecipe.container && isContainer(ingredient) && !(NO_CONTAINER_MODS.includes(mod))) LDRecipe.container = ingredient;
         else LDRecipe.ingredients.push(ingredientToTag(ingredient, loader));
     }
-    if(!LDRecipe.container && !(NO_CONTAINER_MODS.includes(mod))) LDRecipe.container = {item: "minecraft:air"};
+    if(!LDRecipe.container && !(NO_CONTAINER_MODS.includes(mod))) return;
     return LDRecipe;
 }
 function isContainer(ingredient){
