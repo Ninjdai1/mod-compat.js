@@ -65,8 +65,8 @@ function generateTagData(loader){
 }
 
 function ingredientToTag(ingredient, loader){
-    const loader_id = loader=="forge" ? loader : "c";
-    const noLauncherName = (ingredient.item ? ingredient.item : ingredient.tag ? ingredient.tag.replace(`${loader_id}:`, "$loader$:") : "")
+    const loader_id = getLoaderId(loader);
+    const noLauncherName = (ingredient.item ? ingredient.item : ingredient.tag ? ingredient.tag.replace(`c:`, "$loader$:").replace("forge:", "loader$") : "")
     const name_replacements = ingredient_tags_replacement(loader_id);
 
     if(ingredient.item && name_replacements.items[noLauncherName]) {
